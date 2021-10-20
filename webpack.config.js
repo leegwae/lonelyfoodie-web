@@ -19,6 +19,7 @@ module.exports = {
     symlinks: false,
     alias: {
       '@src': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
     },
   },
   devtool: 'inline-source-map',
