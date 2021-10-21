@@ -17,3 +17,8 @@ yarn start
 
 Go to http://localhost:8080/
 
+
+
+## 팀원 이름
+
+이준영
