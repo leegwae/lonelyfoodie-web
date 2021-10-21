@@ -4,3 +4,16 @@
 
 (2021/10/20~)
 
+
+
+## Getting started with yarn
+
+```bash
+git clone https://github.com/LonelyFoodie/lonelyfoodie-web.git
+cd lonelyfoodie-web
+yarn install
+yarn start
+```
+
+Go to http://localhost:8080/
+
