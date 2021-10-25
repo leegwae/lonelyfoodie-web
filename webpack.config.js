@@ -4,7 +4,7 @@ const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.tsx',
+  entry: ['react-hot-loader/patch', './src/index.tsx'],
   module: {
     rules: [
       {
@@ -21,6 +21,9 @@ module.exports = {
     plugins: [new TsConfigPathsPlugin({
       configFile: path.resolve(__dirname, './tsconfig.json')
     })],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    }
   },
   devtool: 'inline-source-map',
   devServer: {
