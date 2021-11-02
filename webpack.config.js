@@ -29,6 +29,7 @@ module.exports = {
   devServer: {
     static: './public',
     hot: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -40,5 +41,6 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/'
   },
 };
