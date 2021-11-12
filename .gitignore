@@ -8,3 +8,6 @@ yarn-error.log*
 #production
 /dist
 
+#env
+.env
+

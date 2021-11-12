@@ -1,6 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
 
 module.exports = {
 	mode: 'development',
@@ -37,6 +41,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 			minify: false,
+		}),
+		new webpack.DefinePlugin({
+			KAKAO_KEY: JSON.stringify(process.env.KAKAO_KEY),
 		}),
 	],
 	output: {
