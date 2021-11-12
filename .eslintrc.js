@@ -22,6 +22,7 @@ module.exports = {
 	rules: {
 		'no-console': 'off',
 		'no-use-before-define': 'off',
+		'no-new': 'off',
 		'import/no-unresolved': 'off',
 		'import/no-extraneous-dependencies': [
 			'error',
