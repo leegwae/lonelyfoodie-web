@@ -3,21 +3,27 @@ import styled from 'styled-components';
 import generateGradient from '@utils/getRandomGradient';
 
 interface PlaceItemProps {
+	id: string;
 	placeName: string;
 	roadAddress: string;
 	star: number;
 	review: number;
+	color: string;
+	onClick: () => void;
 }
 
 const PlaceItem = ({
+	id,
 	placeName,
 	roadAddress,
 	star,
 	review,
+	color,
+	onClick,
 }: PlaceItemProps) => {
 	return (
-		<StyledItem>
-			<ColorBox color={generateGradient()} />
+		<StyledItem onClick={onClick}>
+			<ColorBox color={color} />
 			<Wrapper>
 				<Title>{placeName}</Title>
 				<StyledContainer>
@@ -35,9 +41,13 @@ const StyledItem = styled('li')({
 	flex: 1,
 	listStyle: 'none',
 	padding: '25px',
-	marginBottom: '10px',
 	borderBottom: '1px solid #DADADA',
+	cursor: 'pointer',
 
+	'&: hover': {
+		transition: 'transform 1s',
+		background: '#DADADA',
+	},
 	// '&:last-child': {
 	// 	marginBottom: '10px',
 	// },

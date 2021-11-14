@@ -18,10 +18,16 @@ const { kakao } = window;
 interface MapProps extends HTMLAttributes<HTMLDivElement> {
 	keyword: string;
 	handlePlaces: (places: SearchResult[]) => void;
+	handleInformation: (
+		id: string,
+		star: number,
+		color: string,
+		review: number
+	) => void;
 }
 
 const Map = forwardRef<HTMLDivElement, MapProps>(
-	({ keyword, handlePlaces }, ref) => {
+	({ keyword, handlePlaces, handleInformation }, ref) => {
 		const mapRef = useRef<HTMLDivElement>(null);
 		useImperativeHandle(ref, () => mapRef.current as HTMLDivElement);
 
@@ -65,6 +71,11 @@ const Map = forwardRef<HTMLDivElement, MapProps>(
 				// add mouseout event to marker
 				kakao.maps.event.addListener(marker, 'mouseout', () => {
 					infowindow.close();
+				});
+
+				// add click event to marker
+				kakao.maps.event.addListener(marker, 'click', () => {
+					// handleInformation(place.)
 				});
 			}
 

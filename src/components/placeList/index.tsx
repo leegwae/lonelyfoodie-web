@@ -4,32 +4,49 @@ import PlaceItem from '@components/placeItem';
 import { SearchResult } from '@library/map/types';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
+import generateGradient from '@utils/getRandomGradient';
 
 interface PlaceListProps {
 	places: SearchResult[];
+	onItemClick: (
+		id: string,
+		star: number,
+		color: string,
+		review: number
+	) => void;
 }
-const PlaceList = ({ places }: PlaceListProps) => {
+const PlaceList = ({ places, onItemClick }: PlaceListProps) => {
 	return (
 		<StyledList>
-			{places.map((place) => (
-				<PlaceItem
-					key={place.id}
-					placeName={place.place_name}
-					roadAddress={place.road_address_name}
-					star={getRandomStar()}
-					review={getRandomInt(0, 100)}
-				/>
-			))}
+			{places.map((place) => {
+				const color = generateGradient();
+				const star = getRandomStar();
+				const review = getRandomInt(0, 100);
+
+				return (
+					<PlaceItem
+						key={place.id}
+						id={place.id}
+						placeName={place.place_name}
+						roadAddress={place.road_address_name}
+						color={color}
+						star={star}
+						review={review}
+						onClick={() =>
+							onItemClick(place.id, star, color, review)
+						}
+					/>
+				);
+			})}
 		</StyledList>
 	);
 };
+PlaceList.displayName = 'PlaceList';
 
 const StyledList = styled('div')({
 	display: 'flex',
 	flexDirection: 'column',
-	width: '100%',
-	height: '100%',
-	boxSizing: 'border-box',
+	flex: 1,
 });
 
 export default PlaceList;

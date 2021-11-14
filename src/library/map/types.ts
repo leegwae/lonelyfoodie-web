@@ -12,3 +12,9 @@ export interface SearchResult {
 	x: string;
 	y: string;
 }
+
+export interface Place extends SearchResult {
+	star: number;
+	review: number;
+	color: string;
+}
