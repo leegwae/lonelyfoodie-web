@@ -16,7 +16,6 @@ const Input = forwardRef<string, InputProps>((props, ref) => {
 		<StyledInput
 			{...props}
 			type="text"
-			size={40}
 			value={value}
 			onChange={(e) => setValue(e.target.value)}
 		/>
@@ -29,6 +28,7 @@ const StyledInput = styled('input')({
 	lineHeight: '40px',
 	fontSize: '20px',
 	borderRadius: '4px',
+	width: '100%',
 });
 
 export default Input;
