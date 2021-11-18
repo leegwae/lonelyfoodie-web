@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Button from '@components/button';
 import { Place } from '@library/map/types';
 import TabPanel from '@components/tabPanel';
 import Item from '@components/information/item';
 import RoomIcon from '@mui/icons-material/Room';
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import Review from '@components/tabPanel/review';
+import { Link } from 'react-router-dom';
 
 const Information = (props: Place) => {
-	const { place_name, road_address_name, phone, star, review, color } = props;
+	const { place_name, road_address_name, phone, star, review, color, id } =
+		props;
 	const [value, setValue] = useState<number>(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
+
+	const writeURL = '';
 
 	return (
 		<Wrapper>
@@ -38,7 +44,15 @@ const Information = (props: Place) => {
 						이 정보는 카카오 지도 API를 기반으로 제공됩니다.
 					</Footer>
 				</TabPanel>
-				<TabPanel value={value} index={1} />
+				<TabPanel value={value} index={1}>
+					<Link to={writeURL}>리뷰 작성하러 가기</Link>
+					<Review
+						user_id="testID"
+						review_rating={4}
+						review_text="음식도 맛있었고 주인분도 친절하셨어요"
+						review_date="2021/11/18 16:58"
+					/>
+				</TabPanel>
 			</TapPanelWrapper>
 		</Wrapper>
 	);
