@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 export interface ReviewInfo {
 	user_id: string;
@@ -23,8 +25,11 @@ const Review = ({
 				{'작성자: '} {user_id}
 			</li>
 			<li>
-				⭐ {review_rating}/5 {review_date}
+				⭐ {review_rating}/5 {'작성일시: '} {review_date}
 			</li>
+			<Container maxWidth="sm">
+				<Box sx={{ bgcolor: '#cfe8fc', height: '20vh' }} />
+			</Container>
 			<StyledContainer>{review_text}</StyledContainer>
 		</StyledItem>
 	);

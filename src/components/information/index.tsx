@@ -52,6 +52,12 @@ const Information = (props: Place) => {
 						review_text="음식도 맛있었고 주인분도 친절하셨어요"
 						review_date="2021/11/18 16:58"
 					/>
+					<Review
+						user_id="testID"
+						review_rating={4}
+						review_text="음식도 맛있었고 주인분도 친절하셨어요"
+						review_date="2021/11/18 16:58"
+					/>
 				</TabPanel>
 			</TapPanelWrapper>
 		</Wrapper>
