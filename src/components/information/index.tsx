@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Button from '@components/button';
 import { Place } from '@library/map/types';
 import TabPanel from '@components/tabPanel';
 import Item from '@components/information/item';
@@ -47,16 +46,16 @@ const Information = (props: Place) => {
 				<TabPanel value={value} index={1}>
 					<Link to={writeURL}>리뷰 작성하러 가기</Link>
 					<Review
-						user_id="testID"
-						review_rating={4}
-						review_text="음식도 맛있었고 주인분도 친절하셨어요"
-						review_date="2021/11/18 16:58"
+						userID="testID"
+						reviewRating={4}
+						reviewText="음식도 맛있었고 주인분도 친절하셨어요"
+						reviewDate="2021/11/18 16:58"
 					/>
 					<Review
-						user_id="testID"
-						review_rating={4}
-						review_text="음식도 맛있었고 주인분도 친절하셨어요"
-						review_date="2021/11/18 16:58"
+						userID="testID"
+						reviewRating={4}
+						reviewText="음식도 맛있었고 주인분도 친절하셨어요"
+						reviewDate="2021/11/18 16:58"
 					/>
 				</TabPanel>
 			</TapPanelWrapper>

@@ -1,36 +1,38 @@
-/* eslint-disable camelcase */
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
-export interface ReviewInfo {
-	user_id: string;
-	review_rating: number;
-	// review_photo는 생략, 사진 자리 div로 사각형 그릴 예정
-	review_text: string;
-	review_date: string;
+export interface ReviewProps {
+	userID: string;
+	reviewRating: number;
+	// reviewPhoto는 생략, 사진 자리 Container로 사각형 그림
+	reviewText: string;
+	reviewDate: string;
 	children?: ReactNode;
 }
 
 const Review = ({
-	user_id,
-	review_rating,
-	review_text,
-	review_date,
-}: ReviewInfo) => {
+	userID,
+	reviewRating,
+	reviewText,
+	reviewDate,
+}: ReviewProps) => {
 	return (
 		<StyledItem>
 			<li>
-				{'작성자: '} {user_id}
+				{'작성자: '} {userID}
 			</li>
 			<li>
-				⭐ {review_rating}/5 {'작성일시: '} {review_date}
+				⭐ {reviewRating}/5 {'작성일시: '} {reviewDate}
 			</li>
 			<Container maxWidth="sm">
 				<Box sx={{ bgcolor: '#cfe8fc', height: '20vh' }} />
 			</Container>
-			<StyledContainer>{review_text}</StyledContainer>
+			<Typography variant="body1" gutterBottom>
+				{reviewText}
+			</Typography>
 		</StyledItem>
 	);
 };
@@ -41,11 +43,6 @@ const StyledItem = styled('li')({
 	flex: 1,
 	alignItems: 'center',
 	marginBottom: '25px',
-});
-
-const StyledContainer = styled('div')({
-	fontSize: '18px',
-	alignItems: 'down',
 });
 
 export default Review;
