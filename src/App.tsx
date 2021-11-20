@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import React, { Suspense, lazy } from 'react';
 import styled from 'styled-components';
@@ -16,6 +21,8 @@ declare global {
 
 const Home = lazy(() => import('@routes/Home'));
 const Login = lazy(() => import('@routes/Login'));
+const MyPage = lazy(() => import('@routes/MyPage'));
+const Signup = lazy(() => import('@routes/Signup'));
 
 const App = (): JSX.Element => (
 	<Router>
@@ -32,6 +39,9 @@ const App = (): JSX.Element => (
 				<Suspense fallback={<div>loading...</div>}>
 					<Route path="/" exact component={Home} />
 					<Route path="/login" component={Login} />
+					<Route path="/signup" component={Signup} />
+					<Route path="/mypage" component={MyPage} />
+					<Redirect path="*" to="/" />
 				</Suspense>
 			</Switch>
 		</Wrapper>
@@ -39,13 +49,15 @@ const App = (): JSX.Element => (
 );
 
 const SideBar = styled('div')({
+	zIndex: 10,
 	display: 'flex',
 	flexDirection: 'column',
 	width: '70px',
 	height: '100%',
 	padding: '40px 0px',
-	boxShadow:
-		'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset',
+	boxShadow: 'rgba(17, 17, 26, 0.1) 3px 3px 4px 1px',
+
+	backgroundColor: '#F4F0EF',
 });
 
 const Wrapper = styled('div')({

@@ -125,28 +125,4 @@ const Panel = styled(Paper)({
 	},
 });
 
-// const Panel1 = styled(Paper)({
-// 	display: 'flex',
-// 	flexDirection: 'column',
-// 	height: '100%',
-// 	overflowY: 'scroll',
-
-// 	'&::-webkit-scrollbar': {
-// 		display: 'none',
-// 	},
-// 	backgroundColor: 'blue',
-// });
-
-// const Panel2 = styled(Paper)({
-// 	display: 'flex',
-// 	flexDirection: 'column',
-// 	height: '100%',
-// 	overflowY: 'scroll',
-
-// 	'&::-webkit-scrollbar': {
-// 		display: 'none',
-// 	},
-// 	backgroundColor: 'yellow',
-// });
-
 export default Home;
