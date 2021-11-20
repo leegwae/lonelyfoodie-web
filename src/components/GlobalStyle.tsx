@@ -12,6 +12,7 @@ const globalStyle = css`
 	}
 	a,
 	button {
+		text-decoration: none;
 		border: none;
 		outline: none;
 		background-color: transparent;
