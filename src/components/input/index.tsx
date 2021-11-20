@@ -24,11 +24,13 @@ const Input = forwardRef<string, InputProps>((props, ref) => {
 Input.displayName = 'Input';
 
 const StyledInput = styled('input')({
-	padding: '0px 10px',
+	border: 'none',
+	padding: '10px 10px',
 	lineHeight: '40px',
 	fontSize: '20px',
-	borderRadius: '4px',
+	borderRadius: '10px',
 	width: '100%',
+	boxShadow: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
 });
 
 export default Input;

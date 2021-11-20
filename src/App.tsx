@@ -11,6 +11,7 @@ import GlobalStyle from '@components/GlobalStyle';
 import IconLink from '@components/iconLink';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Loading from '@routes/Loading';
 
 // TODO: type definition 다른 폴더로 빼기
 declare global {
@@ -36,7 +37,7 @@ const App = (): JSX.Element => (
 				/>
 			</SideBar>
 			<Switch>
-				<Suspense fallback={<div>loading...</div>}>
+				<Suspense fallback={<Loading />}>
 					<Route path="/" exact component={Home} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />

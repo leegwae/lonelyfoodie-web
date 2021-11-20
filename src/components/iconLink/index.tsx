@@ -22,7 +22,7 @@ const StyledLink = styled(Link)({
 	marginBottom: '30px',
 
 	'&:hover, &:focus, &:active': {
-		color: '#7C83FD',
+		color: '#F55919',
 	},
 });
 

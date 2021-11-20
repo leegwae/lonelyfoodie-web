@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const Signup = () => {
 	return (
 		<>
 			<StyledWrapper>
 				<StyledInnerWrapper>
-					<Title>고독한 시식가 회원가입하기</Title>
+					<TitleWrapper>
+						<StyledIcon />
+						<Title>고독한 시식가 회원가입하기</Title>
+					</TitleWrapper>
 					<Typography>고독한 시식가에 참여하세요</Typography>
 					<ButtonWrapper>
 						<StyledButton>카카오로 회원가입하기</StyledButton>
@@ -33,6 +37,17 @@ const StyledInnerWrapper = styled('div')({
 	display: 'flex',
 	flexDirection: 'column',
 	width: '700px',
+});
+
+const TitleWrapper = styled('div')({
+	display: 'flex',
+	alignItems: 'center',
+});
+
+const StyledIcon = styled(RestaurantIcon)({
+	color: '#F55919',
+	fontSize: 50,
+	marginRight: 10,
 });
 
 const Title = styled('h1')({
