@@ -33,7 +33,11 @@ const Home = () => {
 	return (
 		<>
 			<MapWrapper>
-				<Map keyword={keyword} setResults={setResults} />
+				<Map
+					keyword={keyword}
+					setResults={setResults}
+					setInformation={setInformation}
+				/>
 				<FormWrapper>
 					<Form onSubmit={handleSubmit}>
 						<Input

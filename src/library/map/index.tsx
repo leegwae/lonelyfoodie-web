@@ -1,22 +1,26 @@
 import React, { useEffect, useRef, forwardRef } from 'react';
 import styled from 'styled-components';
-import { RawResult, SearchResult } from '@library/map/types';
+import { RawResult, Restaurant, SearchResult } from '@library/map/types';
 import { INIT_OPTIONS, SEARCH_OPTIONS } from '@library/map/const';
 import formatRawResults from '@library/map/formatRawResults';
 import getMapBounds from '@library/map/getMapBounds';
 import generateMarker from '@library/map/generateMarker';
 import addEventsOnMarker, { Events } from '@library/map/addEventsOnMarker';
 import createWindowContent from '@library/map/createWindowContent';
+import getRandomStar from '@utils/getRandomStar';
+import getRandomInt from '@utils/getRandomInt';
+import generateGradient from '@utils/getRandomGradient';
 
 const { kakao } = window;
 
 interface MapProps {
 	keyword: string;
 	setResults: (results: SearchResult[]) => void;
+	setInformation: (restaurant: Restaurant) => void;
 }
 
 const Map = forwardRef<HTMLDivElement, MapProps>(
-	({ keyword, setResults }, ref) => {
+	({ keyword, setResults, setInformation }, ref) => {
 		const mapRef = useRef<HTMLDivElement>(null);
 
 		// 키워드 없을 때 지도 렌더링
@@ -60,6 +64,19 @@ const Map = forwardRef<HTMLDivElement, MapProps>(
 							},
 							mouseout: () => {
 								infoWindow.close();
+							},
+							click: () => {
+								const color = generateGradient();
+								const star = getRandomStar();
+								const review = getRandomInt(0, 100);
+
+								const information = {
+									...place,
+									color,
+									star,
+									review,
+								};
+								setInformation(information);
 							},
 						};
 
