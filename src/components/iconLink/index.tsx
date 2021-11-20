@@ -19,7 +19,11 @@ const StyledLink = styled(Link)({
 	display: 'flex',
 	justifyContent: 'center',
 	color: 'black',
-	marginBottom: '20px',
+	marginBottom: '30px',
+
+	'&:hover, &:focus, &:active': {
+		color: '#7C83FD',
+	},
 });
 
 export default IconLink;
