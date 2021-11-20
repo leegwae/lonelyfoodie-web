@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Place } from '@library/map/types';
+import { Restaurant } from '@library/map/types';
 import TabPanel from '@components/tabPanel';
 import Item from '@components/information/item';
 import RoomIcon from '@mui/icons-material/Room';
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-const Information = (props: Place) => {
-	const { place_name, road_address_name, phone, star, review, color } = props;
+interface InformationProps {
+	restaurant: Restaurant;
+	onGoBackClick: () => void;
+}
+const Information = ({ restaurant, onGoBackClick }: InformationProps) => {
+	const { placeName, roadAddressName, phone, star, review, color } =
+		restaurant;
 	const [value, setValue] = useState<number>(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -19,8 +24,8 @@ const Information = (props: Place) => {
 
 	return (
 		<Wrapper>
-			<ColorBox color={color} />
-			<Title>{place_name}</Title>
+			<ColorBox color={color} onClick={onGoBackClick} />
+			<Title>{placeName}</Title>
 			<StyledContainer>
 				<span>⭐{star} / 5</span>
 				<span>리뷰 {review}개</span>
@@ -31,7 +36,7 @@ const Information = (props: Place) => {
 					<StyledTab label="리뷰" />
 				</StyledTabs>
 				<TabPanel value={value} index={0}>
-					<Item icon={<RoomIcon />}>{road_address_name}</Item>
+					<Item icon={<RoomIcon />}>{roadAddressName}</Item>
 					<Item icon={<MapIcon />}>길찾기 바로가기</Item>
 					<Item icon={<LocalPhoneIcon />}>{phone}</Item>
 					<Footer>

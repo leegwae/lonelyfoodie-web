@@ -1,19 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PlaceItem from '@components/placeItem';
-import { SearchResult } from '@library/map/types';
+import { SearchResult, Restaurant } from '@library/map/types';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
 
 interface PlaceListProps {
 	places: SearchResult[];
-	onItemClick: (
-		id: string,
-		star: number,
-		color: string,
-		review: number
-	) => void;
+	onItemClick: (props: Restaurant) => void;
 }
 const PlaceList = ({ places, onItemClick }: PlaceListProps) => {
 	return (
@@ -23,18 +18,12 @@ const PlaceList = ({ places, onItemClick }: PlaceListProps) => {
 				const star = getRandomStar();
 				const review = getRandomInt(0, 100);
 
+				const information = { ...place, color, star, review };
 				return (
 					<PlaceItem
 						key={place.id}
-						id={place.id}
-						placeName={place.place_name}
-						roadAddress={place.road_address_name}
-						color={color}
-						star={star}
-						review={review}
-						onClick={() =>
-							onItemClick(place.id, star, color, review)
-						}
+						{...information}
+						onClick={() => onItemClick(information)}
 					/>
 				);
 			})}

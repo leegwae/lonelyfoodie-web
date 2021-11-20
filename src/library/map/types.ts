@@ -35,8 +35,9 @@ export interface RawResult {
 	y: string;
 }
 
-// export interface Place extends SearchResult {
-// 	star: number;
-// 	review: number;
-// 	color: string;
-// }
+export interface Restaurant extends SearchResult {
+	[index: string]: any;
+	star: number;
+	review: number;
+	color: string;
+}
