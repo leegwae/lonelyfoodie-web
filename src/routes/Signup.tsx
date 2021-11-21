@@ -3,23 +3,21 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
-const Login = () => {
-	const handleClick = () => console.log('HELLO WORLD!');
-
+const Signup = () => {
 	return (
 		<>
 			<StyledWrapper>
 				<StyledInnerWrapper>
 					<TitleWrapper>
 						<StyledIcon />
-						<Title>고독한 시식가 로그인하기</Title>
+						<Title>고독한 시식가 회원가입하기</Title>
 					</TitleWrapper>
-					<Typography>서울시립대 근처 맛집을 찾아보세요</Typography>
+					<Typography>고독한 시식가에 참여하세요</Typography>
 					<ButtonWrapper>
-						<StyledButton>카카오로 로그인하기</StyledButton>
+						<StyledButton>카카오로 회원가입하기</StyledButton>
 						<LinkWrapper>
-							계정이 없다면&nbsp;
-							<StyledLink to="/signup">회원가입하세요</StyledLink>
+							계정이 있다면&nbsp;
+							<StyledLink to="/login">로그인하세요</StyledLink>
 						</LinkWrapper>
 					</ButtonWrapper>
 				</StyledInnerWrapper>
@@ -88,4 +86,4 @@ const StyledLink = styled(Link)({
 	textDecoration: 'underline',
 });
 
-export default Login;
+export default Signup;

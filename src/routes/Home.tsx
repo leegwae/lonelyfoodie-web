@@ -1,124 +1,127 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import { SearchResult, Restaurant } from '@library/map/types';
 import Map from '@library/map';
-import { SearchResult, Place } from '@library/map/types';
 import Input from '@components/input';
 import PlaceList from '@components/placeList';
 import Information from '@components/information';
+import Logo from '@components/logo';
 
 const Home = () => {
 	const inputRef = useRef<string>('');
-	const mapRef = useRef<HTMLDivElement>(null);
 	const panelRef = useRef<HTMLDivElement>(null);
 
 	const [keyword, setKeyword] = useState<string>('');
-	const [places, setPlaces] = useState<SearchResult[]>([]);
-	const [info, setInfo] = useState<Place | null>(null);
+	const [results, setResults] = useState<SearchResult[] | null>(null);
+	const [information, setInformation] = useState<Restaurant | null>(null);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setInfo(null);
+		setInformation(null);
 		setKeyword(inputRef.current);
 	};
 
 	useEffect(() => {
 		panelRef?.current?.scrollTo(0, 0);
-	}, [places]);
+	}, [results]);
 
-	const handleInformation = (
-		id: string,
-		star: number,
-		color: string,
-		review: number
-	) => {
-		places.forEach((place) => {
-			if (place.id === id) {
-				setInfo({ ...place, star, color, review });
-				return;
-			}
-		});
+	const handleInformation = (props: Restaurant) => {
+		setInformation(props);
 	};
 
 	return (
 		<>
-			<Wrapper>
-				<Form onSubmit={handleSubmit}>
-					<Input
-						id="keyword"
-						ref={inputRef}
-						placeholder="키워드를 입력하세요"
-					/>
-					<StyledButton variant="outlined" type="submit">
-						검색
-					</StyledButton>
-				</Form>
-				<Panel elevation={2} ref={panelRef}>
-					{!info ? (
-						<PlaceList
-							places={places}
-							onItemClick={handleInformation}
-						/>
-					) : (
-						<Information {...info} />
-					)}
-				</Panel>
-			</Wrapper>
 			<MapWrapper>
 				<Map
-					id="map"
-					ref={mapRef}
 					keyword={keyword}
-					handlePlaces={setPlaces}
-					handleInformation={handleInformation}
+					setResults={setResults}
+					setInformation={setInformation}
 				/>
+				<FormWrapper>
+					<Form onSubmit={handleSubmit}>
+						<Input
+							id="keyword"
+							ref={inputRef}
+							placeholder="키워드를 검색하여 시립대 맛집을 찾아보세요"
+						/>
+					</Form>
+					<PanelWrapper>
+						{results && (
+							<Panel>
+								<PlaceList
+									places={results}
+									onItemClick={handleInformation}
+								/>
+							</Panel>
+						)}
+						{information && (
+							<Panel>
+								<Information
+									restaurant={information}
+									onGoBackClick={() => setInformation(null)}
+								/>
+							</Panel>
+						)}
+					</PanelWrapper>
+				</FormWrapper>
+				<LogoWrapper>
+					<Logo />
+				</LogoWrapper>
 			</MapWrapper>
 		</>
 	);
 };
 
-const Wrapper = styled('div')({
+const MapWrapper = styled('div')({
+	position: 'relative',
+	flex: 1,
+});
+
+const FormWrapper = styled('div')({
 	display: 'flex',
 	flexDirection: 'column',
 	position: 'absolute',
 	zIndex: 1,
+	top: 0,
+	left: 0,
+	bottom: 0,
 	width: '500px',
 	height: '100%',
 	padding: '30px',
-	boxSizing: 'border-box',
-});
-
-const MapWrapper = styled('div')({
-	position: 'absolute',
-	zIndex: 0,
-	width: '100%',
-	height: '100%',
 });
 
 const Form = styled('form')({
 	display: 'flex',
-	alignItems: 'center',
 	width: '100%',
+	marginBottom: '20px',
 });
 
-const StyledButton = styled(Button)({
-	backgroundColor: 'white',
-	'&:hover': {
-		backgroundColor: 'black',
-		boxShadow: 'none',
-	},
+const PanelWrapper = styled('div')({
+	position: 'relative',
+	flex: 1,
 });
 
 const Panel = styled(Paper)({
-	display: 'flex',
-	flexDirection: 'column',
-	flex: 1,
-	overflowY: 'scroll',
+	position: 'absolute',
+	zIndex: 1,
+	top: 0,
+	left: 0,
+	bottom: 0,
+	width: '100%',
+	height: '100%',
 
+	overflowY: 'scroll',
 	'&::-webkit-scrollbar': {
 		display: 'none',
 	},
+});
+
+const LogoWrapper = styled('div')({
+	position: 'absolute',
+	zIndex: 1,
+	bottom: 30,
+	right: 30,
 });
 
 export default Home;

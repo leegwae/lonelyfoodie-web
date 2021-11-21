@@ -1,26 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import generateGradient from '@utils/getRandomGradient';
+import { Restaurant } from '@library/map/types';
 
-interface PlaceItemProps {
-	id: string;
-	placeName: string;
-	roadAddress: string;
-	star: number;
-	review: number;
-	color: string;
+interface PlaceItemProps extends Restaurant {
 	onClick: () => void;
 }
 
-const PlaceItem = ({
-	id,
-	placeName,
-	roadAddress,
-	star,
-	review,
-	color,
-	onClick,
-}: PlaceItemProps) => {
+const PlaceItem = (props: PlaceItemProps) => {
+	const { color, placeName, review, roadAddressName, star, onClick } = props;
 	return (
 		<StyledItem onClick={onClick}>
 			<ColorBox color={color} />
@@ -30,7 +17,7 @@ const PlaceItem = ({
 					<span style={{ marginRight: '20px' }}>⭐{star} / 5</span>
 					<span>리뷰 {review}개</span>
 				</StyledContainer>
-				<StyledContainer>{roadAddress}</StyledContainer>
+				<StyledContainer>{roadAddressName}</StyledContainer>
 			</Wrapper>
 		</StyledItem>
 	);
@@ -38,7 +25,7 @@ const PlaceItem = ({
 
 const StyledItem = styled('li')({
 	display: 'flex',
-	flex: 1,
+	width: '100%',
 	listStyle: 'none',
 	padding: '25px',
 	borderBottom: '1px solid #DADADA',
