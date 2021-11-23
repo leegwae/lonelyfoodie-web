@@ -18,22 +18,6 @@ const Signup = () => {
 					</LinkWrapper>
 				</StyledWrapper>
 			</Template>
-			{/* <StyledWrapper>
-				<StyledInnerWrapper>
-					<TitleWrapper>
-						<StyledIcon />
-						<Title>고독한 시식가 회원가입하기</Title>
-					</TitleWrapper>
-					<Typography>고독한 시식가에 참여하세요</Typography>
-					<ButtonWrapper>
-						<StyledButton>카카오로 회원가입하기</StyledButton>
-						<LinkWrapper>
-							계정이 있다면&nbsp;
-							<StyledLink to="/login">로그인하세요</StyledLink>
-						</LinkWrapper>
-					</ButtonWrapper>
-				</StyledInnerWrapper>
-			</StyledWrapper> */}
 		</>
 	);
 };

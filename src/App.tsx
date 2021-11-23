@@ -1,9 +1,4 @@
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import React, { Suspense, lazy } from 'react';
 import styled from 'styled-components';
@@ -24,6 +19,7 @@ const Home = lazy(() => import('@routes/Home'));
 const Login = lazy(() => import('@routes/Login'));
 const MyPage = lazy(() => import('@routes/MyPage'));
 const Signup = lazy(() => import('@routes/Signup'));
+const Withdraw = lazy(() => import('@routes/Withdraw'));
 
 const App = (): JSX.Element => (
 	<Router>
@@ -42,7 +38,7 @@ const App = (): JSX.Element => (
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
 					<Route path="/mypage" component={MyPage} />
-					<Redirect path="*" to="/" />
+					<Route path="/withdraw" component={Withdraw} />
 				</Suspense>
 			</Switch>
 		</Wrapper>
