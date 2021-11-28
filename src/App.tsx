@@ -1,6 +1,11 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '@components/GlobalStyle';
 import IconLink from '@components/iconLink';
@@ -21,29 +26,53 @@ const MyPage = lazy(() => import('@routes/MyPage'));
 const Signup = lazy(() => import('@routes/Signup'));
 const Withdraw = lazy(() => import('@routes/Withdraw'));
 
-const App = (): JSX.Element => (
-	<Router>
-		<GlobalStyle />
-		<Wrapper>
-			<SideBar>
-				<IconLink to="/" icon={<HomeIcon fontSize="large" />} />
-				<IconLink
-					to="/login"
-					icon={<AccountCircleIcon fontSize="large" />}
-				/>
-			</SideBar>
-			<Switch>
-				<Suspense fallback={<Loading />}>
-					<Route path="/" exact component={Home} />
-					<Route path="/login" component={Login} />
-					<Route path="/signup" component={Signup} />
-					<Route path="/mypage" component={MyPage} />
-					<Route path="/withdraw" component={Withdraw} />
-				</Suspense>
-			</Switch>
-		</Wrapper>
-	</Router>
-);
+const App = (): JSX.Element => {
+	const [authorization, setAuthorization] = useState<boolean>(false);
+
+	const Auth = () => {
+		const code = new URL(window.location.href).searchParams.get('code');
+		if (code) {
+			setAuthorization(true);
+			return <Redirect to="/mypage" />;
+		}
+		return <div>Auth</div>;
+	};
+	return (
+		<Router>
+			<GlobalStyle />
+			<Wrapper>
+				<SideBar>
+					<IconLink to="/" icon={<HomeIcon fontSize="large" />} />
+					<IconLink
+						to="/mypage"
+						icon={<AccountCircleIcon fontSize="large" />}
+					/>
+				</SideBar>
+				<Switch>
+					<Suspense fallback={<Loading />}>
+						<Route path="/" exact component={Home} />
+						<Route path="/login" component={Login} />
+						<Route path="/signup" component={Signup} />
+						<Route
+							path="/mypage"
+							render={() => (
+								<MyPage
+									authorization={authorization}
+									setAuthorization={() =>
+										setAuthorization(false)
+									}
+								/>
+							)}
+						/>
+						<Route path="/withdraw" component={Withdraw} />
+
+						<Route path="/oauth" component={Auth} />
+					</Suspense>
+				</Switch>
+			</Wrapper>
+		</Router>
+	);
+};
 
 const SideBar = styled('div')({
 	zIndex: 10,
