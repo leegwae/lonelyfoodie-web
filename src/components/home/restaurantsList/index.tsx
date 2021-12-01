@@ -1,30 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import RestaurantItem from '@home/restaurantsItem';
-import { SearchResult } from '@library/map/types';
 import { Restaurant } from '@src/types/restaurant';
-import getRandomStar from '@utils/getRandomStar';
-import getRandomInt from '@utils/getRandomInt';
-import generateGradient from '@utils/getRandomGradient';
+import { restaurantListDemoState } from '@atoms/restaurant';
 
 interface RestaurantListProps {
-	restaurants: SearchResult[];
 	onItemClick: (props: Restaurant) => void;
 }
-const RestaurantList = ({ restaurants, onItemClick }: RestaurantListProps) => {
+const RestaurantList = ({ onItemClick }: RestaurantListProps) => {
+	const restaurantList = useRecoilValue(restaurantListDemoState);
+
 	return (
 		<StyledList>
-			{restaurants.map((restaurant) => {
-				const color = generateGradient();
-				const star = getRandomStar();
-				const review = getRandomInt(0, 100);
-
-				const information = { ...restaurant, color, star, review };
+			{restaurantList.map((restaurant) => {
 				return (
 					<RestaurantItem
 						key={restaurant.id}
-						{...information}
-						onClick={() => onItemClick(information)}
+						{...restaurant}
+						onClick={() => onItemClick(restaurant)}
 					/>
 				);
 			})}

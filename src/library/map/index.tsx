@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, forwardRef } from 'react';
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import { RawResult, SearchResult } from '@library/map/types';
 import { Restaurant } from '@src/types/restaurant';
 import { INIT_OPTIONS, SEARCH_OPTIONS } from '@library/map/const';
@@ -11,18 +12,19 @@ import createWindowContent from '@library/map/createWindowContent';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
+import { searchResultListState } from '@atoms/searchResult';
 
 const { kakao } = window;
 
 interface MapProps {
 	keyword: string;
-	setResults: (results: SearchResult[]) => void;
 	setInformation: (restaurant: Restaurant) => void;
 }
 
 const Map = forwardRef<HTMLDivElement, MapProps>(
-	({ keyword, setResults, setInformation }, ref) => {
+	({ keyword, setInformation }, ref) => {
 		const mapRef = useRef<HTMLDivElement>(null);
+		const setSearchResultList = useSetRecoilState(searchResultListState);
 
 		// 키워드 없을 때 지도 렌더링
 		useEffect(() => {
@@ -45,8 +47,7 @@ const Map = forwardRef<HTMLDivElement, MapProps>(
 
 					// results 상태 변수에 검색 결과 저장
 					const searched: SearchResult[] = formatRawResults(raw);
-					console.log(searched);
-					setResults(searched);
+					setSearchResultList(searched);
 
 					// 검색 결과 기준으로 지도 재설정
 					const bounds = getMapBounds(

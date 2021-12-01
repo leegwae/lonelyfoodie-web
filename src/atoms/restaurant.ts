@@ -1,5 +1,9 @@
 import { atom, selector } from 'recoil';
 import { Restaurant } from '@src/types/restaurant';
+import getRandomStar from '@utils/getRandomStar';
+import getRandomInt from '@utils/getRandomInt';
+import generateGradient from '@utils/getRandomGradient';
+import { searchResultListState } from '@atoms/searchResult';
 
 export const restaurantListState = atom<Restaurant[]>({
 	key: 'restaurantList',
@@ -15,5 +19,20 @@ export const currentRestaurantState = selector({
 		const data = response.json();
 
 		return data;
+	},
+});
+
+export const restaurantListDemoState = selector<Restaurant[]>({
+	key: 'restaurantListDemo',
+	get: ({ get }) => {
+		const searchResultList = get(searchResultListState);
+		const restaurantListDemo = searchResultList.map((raw) => ({
+			...raw,
+			color: generateGradient(),
+			star: getRandomStar(),
+			review: getRandomInt(0, 100),
+		}));
+
+		return restaurantListDemo;
 	},
 });

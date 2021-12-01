@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
-import { SearchResult } from '@library/map/types';
 import { Restaurant } from '@src/types/restaurant';
 import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
@@ -9,15 +8,18 @@ import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
 import { useRecoilValue } from 'recoil';
-import { currentRestaurantState } from '@atoms/restaurant';
+import {
+	searchResultListState,
+	hasSearchResultState,
+} from '@atoms/searchResult';
 
 const Home = () => {
 	const inputRef = useRef<string>('');
 	const panelRef = useRef<HTMLDivElement>(null);
-	const data = useRecoilValue(currentRestaurantState);
-	console.log(data);
+
 	const [keyword, setKeyword] = useState<string>('');
-	const [results, setResults] = useState<SearchResult[] | null>(null);
+	const hasSearchResult = useRecoilValue(hasSearchResultState);
+	const searchResultList = useRecoilValue(searchResultListState);
 	const [information, setInformation] = useState<Restaurant | null>(null);
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -28,7 +30,7 @@ const Home = () => {
 
 	useEffect(() => {
 		panelRef?.current?.scrollTo(0, 0);
-	}, [results]);
+	}, [searchResultList]);
 
 	const handleInformation = (props: Restaurant) => {
 		setInformation(props);
@@ -37,11 +39,7 @@ const Home = () => {
 	return (
 		<>
 			<MapWrapper>
-				<Map
-					keyword={keyword}
-					setResults={setResults}
-					setInformation={setInformation}
-				/>
+				<Map keyword={keyword} setInformation={setInformation} />
 				<FormWrapper>
 					<Form onSubmit={handleSubmit}>
 						<KeywordInput
@@ -51,10 +49,9 @@ const Home = () => {
 						/>
 					</Form>
 					<PanelWrapper>
-						{results && (
-							<Panel>
+						{hasSearchResult && (
+							<Panel ref={panelRef}>
 								<RestaurantList
-									restaurants={results}
 									onItemClick={handleInformation}
 								/>
 							</Panel>
