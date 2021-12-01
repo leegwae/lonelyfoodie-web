@@ -8,7 +8,7 @@ import Tabs from '@home/tabs';
 import Tab from '@home/tab';
 import TabPanel from '@home/tabPanel';
 import IconItem from '@home/restaurantInformation/iconItem';
-import Review from '@home/tabPanel/review';
+import RestaurantRiviewItem from '@home/restaurantReviewItem';
 import { Link } from 'react-router-dom';
 
 interface RestaurantInformationProps {
@@ -52,13 +52,13 @@ const RestaurantInformation = ({
 				</TabPanel>
 				<TabPanel value={tabIndex} index={1}>
 					<Link to={writeURL}>리뷰 작성하러 가기</Link>
-					<Review
+					<RestaurantRiviewItem
 						userID="testID"
 						reviewRating={4}
 						reviewText="음식도 맛있었고 주인분도 친절하셨어요"
 						reviewDate="2021/11/18 16:58"
 					/>
-					<Review
+					<RestaurantRiviewItem
 						userID="testID"
 						reviewRating={4}
 						reviewText="음식도 맛있었고 주인분도 친절하셨어요"

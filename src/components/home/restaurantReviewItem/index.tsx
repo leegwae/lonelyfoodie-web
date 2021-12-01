@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-export interface ReviewProps {
+export interface RestaurantRiviewItemProps {
 	userID: string;
 	reviewRating: number;
 	// reviewPhoto는 생략, 사진 자리 Container로 사각형 그림
@@ -13,12 +13,12 @@ export interface ReviewProps {
 	children?: ReactNode;
 }
 
-const Review = ({
+const RestaurantRiviewItem = ({
 	userID,
 	reviewRating,
 	reviewText,
 	reviewDate,
-}: ReviewProps) => {
+}: RestaurantRiviewItemProps) => {
 	return (
 		<StyledItem>
 			<li>
@@ -45,4 +45,4 @@ const StyledItem = styled('li')({
 	marginBottom: '25px',
 });
 
-export default Review;
+export default RestaurantRiviewItem;
