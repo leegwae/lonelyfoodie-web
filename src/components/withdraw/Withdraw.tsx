@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Template from '@common/template';
-import LabelItem from '@components/labelItem';
+import LabelItem from '@withdraw/labelItem';
 
 const Withdraw = () => {
 	return (
