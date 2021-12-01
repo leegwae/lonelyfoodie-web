@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const Input = forwardRef<string, InputProps>((props, ref) => {
+const KeywordInput = forwardRef<string, InputProps>((props, ref) => {
 	const [value, setValue] = useState<string>('');
 	useImperativeHandle(ref, () => value, [value]);
 
@@ -21,7 +21,7 @@ const Input = forwardRef<string, InputProps>((props, ref) => {
 		/>
 	);
 });
-Input.displayName = 'Input';
+KeywordInput.displayName = 'KeywordInput';
 
 const StyledInput = styled('input')({
 	border: 'none',
@@ -33,4 +33,4 @@ const StyledInput = styled('input')({
 	boxShadow: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
 });
 
-export default Input;
+export default KeywordInput;

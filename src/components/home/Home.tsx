@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
 import { SearchResult, Restaurant } from '@library/map/types';
 import Map from '@library/map';
-import Input from '@home/keywordInput';
+import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import Information from '@components/information';
 import Logo from '@components/logo';
@@ -40,7 +40,7 @@ const Home = () => {
 				/>
 				<FormWrapper>
 					<Form onSubmit={handleSubmit}>
-						<Input
+						<KeywordInput
 							id="keyword"
 							ref={inputRef}
 							placeholder="키워드를 검색하여 시립대 맛집을 찾아보세요"
