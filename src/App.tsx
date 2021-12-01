@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GlobalStyle from '@components/GlobalStyle';
-import Loading from '@routes/Loading';
+import Loading from '@loading/Loading';
 import IconLink from '@common/iconLink';
 import Sidebar from '@common/sidebar';
 
@@ -19,8 +19,7 @@ declare global {
 const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@routes/Login'));
 const MyPage = lazy(() => import('@routes/MyPage'));
-const Signup = lazy(() => import('@routes/Signup'));
-const Withdraw = lazy(() => import('@routes/Withdraw'));
+const Withdraw = lazy(() => import('@withdraw/Withdraw'));
 
 const App = (): JSX.Element => (
 	<Router>
@@ -37,9 +36,8 @@ const App = (): JSX.Element => (
 				<Suspense fallback={<Loading />}>
 					<Route path="/" exact component={Home} />
 					<Route path="/login" component={Login} />
-					<Route path="/signup" component={Signup} />
-					<Route path="/mypage" component={MyPage} />
-					<Route path="/withdraw" component={Withdraw} />
+					<Route path="/mypage" exact component={MyPage} />
+					<Route path="/mypage/withdraw" component={Withdraw} />
 				</Suspense>
 			</Switch>
 		</Wrapper>

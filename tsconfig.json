@@ -50,6 +50,9 @@
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
       "@common/*": ["src/components/common/*"],
+      "@home/*": ["src/components/home/*"],
+      "@withdraw/*": ["src/components/withdraw/*"],
+      "@loading/*": ["src/components/loading/*"],
       "@components/*": ["src/components/*"],
       "@library/*": ["src/library/*"],
       "@routes/*": ["src/routes/*"],
