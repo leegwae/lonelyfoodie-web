@@ -18,7 +18,7 @@ declare global {
 
 const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@login/Login'));
-const MyPage = lazy(() => import('@routes/MyPage'));
+const Mypage = lazy(() => import('@mypage/Mypage'));
 const Withdraw = lazy(() => import('@withdraw/Withdraw'));
 
 const App = (): JSX.Element => (
@@ -36,7 +36,7 @@ const App = (): JSX.Element => (
 				<Suspense fallback={<Loading />}>
 					<Route path="/" exact component={Home} />
 					<Route path="/login" component={Login} />
-					<Route path="/mypage" exact component={MyPage} />
+					<Route path="/mypage" exact component={Mypage} />
 					<Route path="/mypage/withdraw" component={Withdraw} />
 				</Suspense>
 			</Switch>
