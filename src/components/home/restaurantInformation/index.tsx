@@ -23,12 +23,47 @@ const RestaurantInformation = ({
 		restaurant;
 	const [tabIndex, setTabIndex] = useState<number>(0);
 
-	const handleChange = (event: React.SyntheticEvent, newTabIndex: number) => {
+	const handleTabChange = (
+		event: React.SyntheticEvent,
+		newTabIndex: number
+	) => {
 		setTabIndex(newTabIndex);
 	};
 
 	const writeURL = '';
 
+	const getInformationTab = () => {
+		return (
+			<TabPanel value={tabIndex} index={0}>
+				<IconItem icon={<RoomIcon />}>{roadAddressName}</IconItem>
+				<IconItem icon={<MapIcon />}>길찾기 바로가기</IconItem>
+				<IconItem icon={<LocalPhoneIcon />}>{phone}</IconItem>
+				<Footer>
+					이 정보는 카카오 지도 API를 기반으로 제공됩니다.
+				</Footer>
+			</TabPanel>
+		);
+	};
+
+	const getReviewTab = () => {
+		return (
+			<TabPanel value={tabIndex} index={1}>
+				<Link to={writeURL}>리뷰 작성하러 가기</Link>
+				<RestaurantRiviewItem
+					userID="testID"
+					reviewRating={4}
+					reviewText="음식도 맛있었고 주인분도 친절하셨어요"
+					reviewDate="2021/11/18 16:58"
+				/>
+				<RestaurantRiviewItem
+					userID="testID"
+					reviewRating={4}
+					reviewText="음식도 맛있었고 주인분도 친절하셨어요"
+					reviewDate="2021/11/18 16:58"
+				/>
+			</TabPanel>
+		);
+	};
 	return (
 		<Wrapper>
 			<ColorBox color={color} onClick={onGoBackClick} />
@@ -38,33 +73,12 @@ const RestaurantInformation = ({
 				<span>리뷰 {review}개</span>
 			</StyledContainer>
 			<TapPanelWrapper>
-				<Tabs value={tabIndex} onChange={handleChange}>
+				<Tabs value={tabIndex} onChange={handleTabChange}>
 					<Tab label="정보" />
 					<Tab label="리뷰" />
 				</Tabs>
-				<TabPanel value={tabIndex} index={0}>
-					<IconItem icon={<RoomIcon />}>{roadAddressName}</IconItem>
-					<IconItem icon={<MapIcon />}>길찾기 바로가기</IconItem>
-					<IconItem icon={<LocalPhoneIcon />}>{phone}</IconItem>
-					<Footer>
-						이 정보는 카카오 지도 API를 기반으로 제공됩니다.
-					</Footer>
-				</TabPanel>
-				<TabPanel value={tabIndex} index={1}>
-					<Link to={writeURL}>리뷰 작성하러 가기</Link>
-					<RestaurantRiviewItem
-						userID="testID"
-						reviewRating={4}
-						reviewText="음식도 맛있었고 주인분도 친절하셨어요"
-						reviewDate="2021/11/18 16:58"
-					/>
-					<RestaurantRiviewItem
-						userID="testID"
-						reviewRating={4}
-						reviewText="음식도 맛있었고 주인분도 친절하셨어요"
-						reviewDate="2021/11/18 16:58"
-					/>
-				</TabPanel>
+				{getInformationTab()}
+				{getReviewTab()}
 			</TapPanelWrapper>
 		</Wrapper>
 	);
