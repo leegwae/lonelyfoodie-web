@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
 import { SearchResult, Restaurant } from '@library/map/types';
 import Map from '@library/map';
-import Input from '@components/input';
-import PlaceList from '@components/placeList';
+import Input from '@home/keywordInput';
+import RestaurantList from '@home/restaurantsList';
 import Information from '@components/information';
 import Logo from '@components/logo';
 
@@ -49,8 +49,8 @@ const Home = () => {
 					<PanelWrapper>
 						{results && (
 							<Panel>
-								<PlaceList
-									places={results}
+								<RestaurantList
+									restaurants={results}
 									onItemClick={handleInformation}
 								/>
 							</Panel>

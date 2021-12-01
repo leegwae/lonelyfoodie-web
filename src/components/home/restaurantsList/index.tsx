@@ -1,27 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import PlaceItem from '@components/placeItem';
+import RestaurantItem from '@home/restaurantsItem';
 import { SearchResult, Restaurant } from '@library/map/types';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
 
-interface PlaceListProps {
-	places: SearchResult[];
+interface RestaurantListProps {
+	restaurants: SearchResult[];
 	onItemClick: (props: Restaurant) => void;
 }
-const PlaceList = ({ places, onItemClick }: PlaceListProps) => {
+const RestaurantList = ({ restaurants, onItemClick }: RestaurantListProps) => {
 	return (
 		<StyledList>
-			{places.map((place) => {
+			{restaurants.map((restaurant) => {
 				const color = generateGradient();
 				const star = getRandomStar();
 				const review = getRandomInt(0, 100);
 
-				const information = { ...place, color, star, review };
+				const information = { ...restaurant, color, star, review };
 				return (
-					<PlaceItem
-						key={place.id}
+					<RestaurantItem
+						key={restaurant.id}
 						{...information}
 						onClick={() => onItemClick(information)}
 					/>
@@ -30,7 +30,7 @@ const PlaceList = ({ places, onItemClick }: PlaceListProps) => {
 		</StyledList>
 	);
 };
-PlaceList.displayName = 'PlaceList';
+RestaurantList.displayName = 'RestaurantList';
 
 const StyledList = styled('div')({
 	display: 'flex',
@@ -38,4 +38,4 @@ const StyledList = styled('div')({
 	flex: 1,
 });
 
-export default PlaceList;
+export default RestaurantList;

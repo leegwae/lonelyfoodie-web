@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Restaurant } from '@library/map/types';
 
-interface PlaceItemProps extends Restaurant {
+interface RestaurantItemProps extends Restaurant {
 	onClick: () => void;
 }
 
-const PlaceItem = (props: PlaceItemProps) => {
+const RestaurantItem = (props: RestaurantItemProps) => {
 	const { color, placeName, review, roadAddressName, star, onClick } = props;
 	return (
 		<StyledItem onClick={onClick}>
@@ -65,4 +65,4 @@ const StyledContainer = styled('div')({
 	display: 'flex',
 	width: '100%',
 });
-export default PlaceItem;
+export default RestaurantItem;
