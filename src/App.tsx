@@ -17,7 +17,7 @@ declare global {
 }
 
 const Home = lazy(() => import('@home/Home'));
-const Login = lazy(() => import('@routes/Login'));
+const Login = lazy(() => import('@login/Login'));
 const MyPage = lazy(() => import('@routes/MyPage'));
 const Withdraw = lazy(() => import('@withdraw/Withdraw'));
 
