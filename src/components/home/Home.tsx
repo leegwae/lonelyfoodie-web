@@ -8,11 +8,14 @@ import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
+import { useRecoilValue } from 'recoil';
+import { currentRestaurantState } from '@atoms/restaurant';
 
 const Home = () => {
 	const inputRef = useRef<string>('');
 	const panelRef = useRef<HTMLDivElement>(null);
-
+	const data = useRecoilValue(currentRestaurantState);
+	console.log(data);
 	const [keyword, setKeyword] = useState<string>('');
 	const [results, setResults] = useState<SearchResult[] | null>(null);
 	const [information, setInformation] = useState<Restaurant | null>(null);

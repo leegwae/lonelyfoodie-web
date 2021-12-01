@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import React, { Suspense, lazy } from 'react';
+import { RecoilRoot } from 'recoil';
 import styled from 'styled-components';
 import GlobalStyle from '@components/GlobalStyle';
 import HomeIcon from '@mui/icons-material/Home';
@@ -33,12 +34,14 @@ const App = (): JSX.Element => (
 				/>
 			</Sidebar>
 			<Switch>
-				<Suspense fallback={<Loading />}>
-					<Route path="/" exact component={Home} />
-					<Route path="/login" component={Login} />
-					<Route path="/mypage" exact component={Mypage} />
-					<Route path="/mypage/withdraw" component={Withdraw} />
-				</Suspense>
+				<RecoilRoot>
+					<Suspense fallback={<Loading />}>
+						<Route path="/" exact component={Home} />
+						<Route path="/login" component={Login} />
+						<Route path="/mypage" exact component={Mypage} />
+						<Route path="/mypage/withdraw" component={Withdraw} />
+					</Suspense>
+				</RecoilRoot>
 			</Switch>
 		</Wrapper>
 	</Router>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, forwardRef } from 'react';
 import styled from 'styled-components';
-import { RawResult, Restaurant, SearchResult } from '@library/map/types';
+import { RawResult, SearchResult } from '@library/map/types';
+import { Restaurant } from '@src/types/restaurant';
 import { INIT_OPTIONS, SEARCH_OPTIONS } from '@library/map/const';
 import formatRawResults from '@library/map/formatRawResults';
 import getMapBounds from '@library/map/getMapBounds';
@@ -44,6 +45,7 @@ const Map = forwardRef<HTMLDivElement, MapProps>(
 
 					// results 상태 변수에 검색 결과 저장
 					const searched: SearchResult[] = formatRawResults(raw);
+					console.log(searched);
 					setResults(searched);
 
 					// 검색 결과 기준으로 지도 재설정
