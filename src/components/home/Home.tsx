@@ -6,7 +6,7 @@ import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
-import Logo from '@components/logo';
+import Logo from '@home/logo';
 
 const Home = () => {
 	const inputRef = useRef<string>('');
