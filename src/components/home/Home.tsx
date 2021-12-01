@@ -5,7 +5,7 @@ import { SearchResult, Restaurant } from '@library/map/types';
 import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
-import Information from '@components/information';
+import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@components/logo';
 
 const Home = () => {
@@ -57,7 +57,7 @@ const Home = () => {
 						)}
 						{information && (
 							<Panel>
-								<Information
+								<RestaurantInformation
 									restaurant={information}
 									onGoBackClick={() => setInformation(null)}
 								/>

@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import { Restaurant } from '@library/map/types';
-import TabPanel from '@components/tabPanel';
-import Item from '@components/information/item';
 import RoomIcon from '@mui/icons-material/Room';
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import Review from '@components/tabPanel/review';
+import { Restaurant } from '@library/map/types';
+import Tabs from '@home/tabs';
+import Tab from '@home/tab';
+import TabPanel from '@home/tabPanel';
+import IconItem from '@home/restaurantInformation/iconItem';
+import Review from '@home/tabPanel/review';
 import { Link } from 'react-router-dom';
 
-interface InformationProps {
+interface RestaurantInformationProps {
 	restaurant: Restaurant;
 	onGoBackClick: () => void;
 }
-const Information = ({ restaurant, onGoBackClick }: InformationProps) => {
+const RestaurantInformation = ({
+	restaurant,
+	onGoBackClick,
+}: RestaurantInformationProps) => {
 	const { placeName, roadAddressName, phone, star, review, color } =
 		restaurant;
-	const [value, setValue] = useState<number>(0);
+	const [tabIndex, setTabIndex] = useState<number>(0);
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
+	const handleChange = (event: React.SyntheticEvent, newTabIndex: number) => {
+		setTabIndex(newTabIndex);
 	};
 
 	const writeURL = '';
@@ -35,19 +38,19 @@ const Information = ({ restaurant, onGoBackClick }: InformationProps) => {
 				<span>리뷰 {review}개</span>
 			</StyledContainer>
 			<TapPanelWrapper>
-				<StyledTabs value={value} onChange={handleChange}>
-					<StyledTab label="정보" />
-					<StyledTab label="리뷰" />
-				</StyledTabs>
-				<TabPanel value={value} index={0}>
-					<Item icon={<RoomIcon />}>{roadAddressName}</Item>
-					<Item icon={<MapIcon />}>길찾기 바로가기</Item>
-					<Item icon={<LocalPhoneIcon />}>{phone}</Item>
+				<Tabs value={tabIndex} onChange={handleChange}>
+					<Tab label="정보" />
+					<Tab label="리뷰" />
+				</Tabs>
+				<TabPanel value={tabIndex} index={0}>
+					<IconItem icon={<RoomIcon />}>{roadAddressName}</IconItem>
+					<IconItem icon={<MapIcon />}>길찾기 바로가기</IconItem>
+					<IconItem icon={<LocalPhoneIcon />}>{phone}</IconItem>
 					<Footer>
 						이 정보는 카카오 지도 API를 기반으로 제공됩니다.
 					</Footer>
 				</TabPanel>
-				<TabPanel value={value} index={1}>
+				<TabPanel value={tabIndex} index={1}>
 					<Link to={writeURL}>리뷰 작성하러 가기</Link>
 					<Review
 						userID="testID"
@@ -102,51 +105,6 @@ const TapPanelWrapper = styled('div')({
 	flex: 1,
 });
 
-interface StyledTabsProps {
-	children?: React.ReactNode;
-	value: number;
-	onChange: (event: React.SyntheticEvent, newValue: number) => void;
-}
-
-const StyledTabs = styled((props: StyledTabsProps) => (
-	<Tabs
-		{...props}
-		TabIndicatorProps={{
-			children: <span className="MuiTabs-indicatorSpan" />,
-		}}
-	/>
-))({
-	width: '100%',
-	'& .MuiTabs-indicator': {
-		display: 'flex',
-		justifyContent: 'center',
-		backgroundColor: 'transparent',
-	},
-	'& .MuiTabs-indicatorSpan': {
-		width: '100%',
-		backgroundColor: '#635ee7',
-	},
-});
-
-interface StyledTabProps {
-	label: string;
-}
-
-const StyledTab = styled((props: StyledTabProps) => (
-	<Tab disableRipple {...props} />
-))(() => ({
-	flex: 1,
-	color: 'black',
-	fontSize: '20px',
-	'&.Mui-selected': {
-		color: '#635ee7',
-		fontWeight: 900,
-	},
-	'&.Mui-focusVisible': {
-		// backgroundColor: 'rgba(100, 95, 228, 0.32)',
-	},
-}));
-
 const Footer = styled('h4')({
 	padding: '0px',
 	margin: '0px',
@@ -154,4 +112,4 @@ const Footer = styled('h4')({
 	color: 'grey',
 });
 
-export default Information;
+export default RestaurantInformation;

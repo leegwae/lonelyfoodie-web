@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
-interface ItemProps {
+interface IconItemProps {
 	icon: JSX.Element;
 	children?: ReactNode;
 }
 
-const Item = ({ icon, children }: ItemProps) => {
+const IconItem = ({ icon, children }: IconItemProps) => {
 	return (
 		<StyledItem>
 			<IconWrapper>{icon}</IconWrapper>
@@ -15,7 +15,7 @@ const Item = ({ icon, children }: ItemProps) => {
 	);
 };
 
-Item.defaultProps = {
+IconItem.defaultProps = {
 	children: <div>데이터가 없어요</div>,
 };
 
@@ -37,4 +37,4 @@ const IconWrapper = styled('div')({
 const StyledContainer = styled('div')({
 	fontSize: '20px',
 });
-export default Item;
+export default IconItem;
