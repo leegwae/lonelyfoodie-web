@@ -36,6 +36,13 @@ module.exports = {
 		static: './public',
 		hot: true,
 		historyApiFallback: true,
+		port: 8080,
+		proxy: {
+			'/api/': {
+				target: 'http://localhost:5000',
+				changeOrigin: true,
+			},
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
