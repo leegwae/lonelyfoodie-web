@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
-import { SearchResult, Restaurant } from '@library/map/types';
+import { SearchResult } from '@library/map/types';
+import { Restaurant } from '@src/types/restaurant';
 import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';

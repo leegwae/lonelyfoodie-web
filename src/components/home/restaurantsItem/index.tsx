@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Restaurant } from '@library/map/types';
+import { Restaurant } from '@src/types/restaurant';
 
 interface RestaurantItemProps extends Restaurant {
 	onClick: () => void;

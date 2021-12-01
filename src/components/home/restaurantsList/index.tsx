@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import RestaurantItem from '@home/restaurantsItem';
-import { SearchResult, Restaurant } from '@library/map/types';
+import { SearchResult } from '@library/map/types';
+import { Restaurant } from '@src/types/restaurant';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';

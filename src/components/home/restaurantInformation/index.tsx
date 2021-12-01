@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RoomIcon from '@mui/icons-material/Room';
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { Restaurant } from '@library/map/types';
+import { Restaurant } from '@src/types/restaurant';
 import Tabs from '@home/tabs';
 import Tab from '@home/tab';
 import TabPanel from '@home/tabPanel';
