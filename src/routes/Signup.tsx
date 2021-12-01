@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Template from '@components/template';
+import Template from '@common/template';
 
 const Signup = () => {
 	return (
