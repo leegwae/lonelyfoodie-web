@@ -3,7 +3,7 @@ import { Restaurant } from '@src/types/restaurant';
 import getRandomStar from '@utils/getRandomStar';
 import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
-import { searchResultListState } from '@atoms/searchResult';
+import { searchResultListState } from '@library/map/atoms/searchResult';
 
 export const currentRestaurantState = atom<Restaurant | null>({
 	key: 'currentRestaurant',

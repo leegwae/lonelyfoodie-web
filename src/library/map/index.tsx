@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import { RawResult, SearchResult } from '@library/map/types';
 import { INIT_OPTIONS, SEARCH_OPTIONS } from '@library/map/const';
-import formatRawResults from '@library/map/formatRawResults';
-import getMapBounds from '@library/map/getMapBounds';
-import generateMarker from '@library/map/generateMarker';
-import addEventsOnMarker, { Events } from '@library/map/addEventsOnMarker';
-import createWindowContent from '@library/map/createWindowContent';
-import { searchResultListState } from '@atoms/searchResult';
-import { currentRestaurantState } from '@atoms/restaurant';
+import formatRawResults from '@library/map/utils/formatRawResults';
+import getMapBounds from '@library/map/utils/getMapBounds';
+import generateMarker from '@library/map/utils/generateMarker';
+import addEventsOnMarker, {
+	Events,
+} from '@library/map/utils/addEventsOnMarker';
+import createWindowContent from '@library/map/utils/createWindowContent';
+import { searchResultListState } from '@library/map/atoms/searchResult';
 
 const { kakao } = window;
 
@@ -18,8 +19,8 @@ interface MapProps {
 }
 
 const Map = forwardRef<HTMLDivElement, MapProps>(({ keyword }, ref) => {
-	const mapRef = useRef<HTMLDivElement>(null);
 	const setSearchResultList = useSetRecoilState(searchResultListState);
+	const mapRef = useRef<HTMLDivElement>(null);
 
 	// 키워드 없을 때 지도 렌더링
 	useEffect(() => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
-import { Restaurant } from '@src/types/restaurant';
 import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
@@ -9,10 +8,8 @@ import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import {
-	searchResultListState,
-	hasSearchResultState,
-} from '@atoms/searchResult';
-import {
+	restaurantListDemoState,
+	hasRestaurantListState,
 	currentRestaurantState,
 	hasCurrentRestaurantState,
 } from '@atoms/restaurant';
@@ -25,11 +22,11 @@ const Home = () => {
 	// ========== 패널 스크롤을 위한 ref ======================
 	const panelRef = useRef<HTMLDivElement>(null);
 
-	// ========= 카카오 지도 API 검색 결과 관련 =================
-	const searchResultList = useRecoilValue(searchResultListState);
-	const hasSearchResult = useRecoilValue(hasSearchResultState);
+	// ========= 음식점 리스트 =================
+	const restaurantList = useRecoilValue(restaurantListDemoState);
+	const hasRestaurantList = useRecoilValue(hasRestaurantListState);
 
-	// ========= 카카오 지도 API 검색 결과로 불러온 음식점 정보 관련 ===========
+	// ========= 하나의 음식점 정보 ===========
 	const hasCurrentRestaurant = useRecoilValue(hasCurrentRestaurantState);
 	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
 
@@ -46,7 +43,7 @@ const Home = () => {
 	useEffect(() => {
 		// 스크롤을 상단으로 올린다.
 		panelRef?.current?.scrollTo(0, 0);
-	}, [searchResultList]);
+	}, [restaurantList]);
 
 	return (
 		<>
@@ -61,7 +58,7 @@ const Home = () => {
 						/>
 					</Form>
 					<PanelWrapper>
-						{hasSearchResult && (
+						{hasRestaurantList && (
 							<Panel ref={panelRef}>
 								<RestaurantList />
 							</Panel>
