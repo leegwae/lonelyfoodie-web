@@ -14,6 +14,7 @@ const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@login/Login'));
 const Mypage = lazy(() => import('@mypage/Mypage'));
 const Withdraw = lazy(() => import('@withdraw/Withdraw'));
+const Edit = lazy(() => import('@edit/Edit'));
 
 const App = (): JSX.Element => (
 	<Router>
@@ -31,6 +32,7 @@ const App = (): JSX.Element => (
 					<Suspense fallback={<Loading />}>
 						<Route path="/" exact component={Home} />
 						<Route path="/login" component={Login} />
+						<Route path="/edit" component={Edit} />
 						<Route path="/mypage" exact component={Mypage} />
 						<Route path="/mypage/withdraw" component={Withdraw} />
 					</Suspense>

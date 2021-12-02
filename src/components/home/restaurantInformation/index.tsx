@@ -8,7 +8,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { Restaurant } from '@src/types/restaurant';
 import Tabs from '@home/tabs';
 import Tab from '@home/tab';
-import TabPanel from '@home/tabPanel';
+import TabPanel from '@home/tabpanel';
 import IconItem from '@home/restaurantInformation/iconItem';
 import ReviewList from '@home/restaurantInformation/reviewList';
 import {
@@ -55,7 +55,7 @@ const RestaurantInformation = () => {
 	const getReviewTab = () => {
 		return (
 			<TabPanel value={tabIndex} index={1}>
-				<Link to={writeURL}>리뷰 작성하러 가기</Link>
+				<Link to="/edit">리뷰 작성하러 가기</Link>
 				<ReviewList />
 			</TabPanel>
 		);
