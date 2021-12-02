@@ -6,12 +6,7 @@ import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
-import {
-	useRecoilState,
-	useRecoilValue,
-	useResetRecoilState,
-	useSetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import {
 	restaurantListDemoState,
 	hasRestaurantListState,
@@ -19,7 +14,6 @@ import {
 	hasCurrentRestaurantState,
 } from '@atoms/restaurant';
 import currentPlaceState from '@library/map/atoms/currentPlace';
-import { SearchResult } from '@library/map/types';
 
 const Home = () => {
 	// =========== 키워드 검색 ===============================
