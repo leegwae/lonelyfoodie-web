@@ -9,6 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Loading from '@loading/Loading';
 import IconLink from '@common/iconLink';
 import Sidebar from '@common/sidebar';
+import Auth from '@auth/Auth';
 
 const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@login/Login'));
@@ -35,6 +36,8 @@ const App = (): JSX.Element => (
 						<Route path="/edit" component={Edit} />
 						<Route path="/mypage" exact component={Mypage} />
 						<Route path="/mypage/withdraw" component={Withdraw} />
+
+						<Route path="/oauth" component={Auth} />
 					</Suspense>
 				</RecoilRoot>
 			</Switch>
