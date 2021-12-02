@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import Paper from '@mui/material/Paper';
 import Map from '@library/map';
 import KeywordInput from '@home/keywordInput';
-import RestaurantList from '@home/restaurantsList';
+import RestaurantList from '@home/restaurantList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import {
 	restaurantListDemoState,
 	hasRestaurantListState,
-	currentRestaurantState,
 	hasCurrentRestaurantState,
+	currentRestaurantIdState,
 } from '@atoms/restaurant';
 import currentPlaceState from '@library/map/atoms/currentPlace';
 
@@ -23,6 +23,7 @@ const Home = () => {
 	// ========== 패널 스크롤을 위한 ref ======================
 	const panelRef = useRef<HTMLDivElement>(null);
 
+	// ========== 지도에서 클릭된 음식점 ======================
 	const currentClickedPlace = useRecoilValue(currentPlaceState);
 
 	// ========= 음식점 리스트 =================
@@ -31,14 +32,16 @@ const Home = () => {
 
 	// ========= 하나의 음식점 정보 ===========
 	const hasCurrentRestaurant = useRecoilValue(hasCurrentRestaurantState);
-	const setCurrentRestaurant = useSetRecoilState(currentRestaurantState);
-	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
+	const resetCurrentRestaurantId = useResetRecoilState(
+		currentRestaurantIdState
+	);
+	const setCurrentRestaurantId = useSetRecoilState(currentRestaurantIdState);
 
 	// 키워드 검색 시
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		// 현재 패널에 띄워진 음식점 정보를 초기화
-		resetCurrentRestaurant();
+		resetCurrentRestaurantId();
 		// 키워드를 사용자의 입력값으로 설정
 		setKeyword(inputRef.current);
 	};
@@ -52,12 +55,7 @@ const Home = () => {
 	// 마커 클릭되면 현재 음식점을 해당 마커의 음식점으로 설정
 	useEffect(() => {
 		if (currentClickedPlace) {
-			const clickedRestaurant = restaurantList.find(
-				(restaurant) => restaurant.id === currentClickedPlace.id
-			);
-			if (clickedRestaurant === undefined) return;
-
-			setCurrentRestaurant(clickedRestaurant);
+			setCurrentRestaurantId(currentClickedPlace.id);
 		}
 	}, [currentClickedPlace]);
 

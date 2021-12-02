@@ -10,17 +10,24 @@ import Tabs from '@home/tabs';
 import Tab from '@home/tab';
 import TabPanel from '@home/tabPanel';
 import IconItem from '@home/restaurantInformation/iconItem';
-import RestaurantRiviewItem from '@home/restaurantReviewItem';
-import { currentRestaurantState } from '@atoms/restaurant';
+import ReviewList from '@home/restaurantInformation/reviewList';
+import {
+	currentRestaurantIdState,
+	currentRestaurantState,
+} from '@atoms/restaurant';
 
 const RestaurantInformation = () => {
 	const currentRestaurant = useRecoilValue(
 		currentRestaurantState
 	) as Restaurant;
-	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
+	const resetCurrentRestaurantId = useResetRecoilState(
+		currentRestaurantIdState
+	);
+
 	const { placeName, roadAddressName, phone, star, review, color } =
 		currentRestaurant;
 
+	// ================ 탭 패널 인덱스 =========================
 	const [tabIndex, setTabIndex] = useState<number>(0);
 
 	const handleTabChange = (
@@ -49,24 +56,13 @@ const RestaurantInformation = () => {
 		return (
 			<TabPanel value={tabIndex} index={1}>
 				<Link to={writeURL}>리뷰 작성하러 가기</Link>
-				<RestaurantRiviewItem
-					userID="testID"
-					reviewRating={4}
-					reviewText="음식도 맛있었고 주인분도 친절하셨어요"
-					reviewDate="2021/11/18 16:58"
-				/>
-				<RestaurantRiviewItem
-					userID="testID"
-					reviewRating={4}
-					reviewText="음식도 맛있었고 주인분도 친절하셨어요"
-					reviewDate="2021/11/18 16:58"
-				/>
+				<ReviewList />
 			</TabPanel>
 		);
 	};
 	return (
 		<Wrapper>
-			<ColorBox color={color} onClick={resetCurrentRestaurant} />
+			<ColorBox color={color} onClick={resetCurrentRestaurantId} />
 			<Title>{placeName}</Title>
 			<StyledContainer>
 				<span>⭐{star} / 5</span>

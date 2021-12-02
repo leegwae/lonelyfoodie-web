@@ -3,20 +3,16 @@ import styled from 'styled-components';
 
 interface IconItemProps {
 	icon: JSX.Element;
-	children?: ReactNode;
+	children: ReactNode;
 }
 
 const IconItem = ({ icon, children }: IconItemProps) => {
 	return (
 		<StyledItem>
 			<IconWrapper>{icon}</IconWrapper>
-			<StyledContainer>{children}</StyledContainer>
+			<StyledContainer>{children || '데이터가 없어요'}</StyledContainer>
 		</StyledItem>
 	);
-};
-
-IconItem.defaultProps = {
-	children: <div>데이터가 없어요</div>,
 };
 
 const StyledItem = styled('li')({
