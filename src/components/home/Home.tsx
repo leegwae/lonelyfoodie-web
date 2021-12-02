@@ -6,13 +6,20 @@ import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import {
+	useRecoilState,
+	useRecoilValue,
+	useResetRecoilState,
+	useSetRecoilState,
+} from 'recoil';
 import {
 	restaurantListDemoState,
 	hasRestaurantListState,
 	currentRestaurantState,
 	hasCurrentRestaurantState,
 } from '@atoms/restaurant';
+import currentPlaceState from '@library/map/atoms/currentPlace';
+import { SearchResult } from '@library/map/types';
 
 const Home = () => {
 	// =========== 키워드 검색 ===============================
@@ -22,12 +29,15 @@ const Home = () => {
 	// ========== 패널 스크롤을 위한 ref ======================
 	const panelRef = useRef<HTMLDivElement>(null);
 
+	const currentClickedPlace = useRecoilValue(currentPlaceState);
+
 	// ========= 음식점 리스트 =================
 	const restaurantList = useRecoilValue(restaurantListDemoState);
 	const hasRestaurantList = useRecoilValue(hasRestaurantListState);
 
 	// ========= 하나의 음식점 정보 ===========
 	const hasCurrentRestaurant = useRecoilValue(hasCurrentRestaurantState);
+	const setCurrentRestaurant = useSetRecoilState(currentRestaurantState);
 	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
 
 	// 키워드 검색 시
@@ -44,6 +54,18 @@ const Home = () => {
 		// 스크롤을 상단으로 올린다.
 		panelRef?.current?.scrollTo(0, 0);
 	}, [restaurantList]);
+
+	// 마커 클릭되면 현재 음식점을 해당 마커의 음식점으로 설정
+	useEffect(() => {
+		if (currentClickedPlace) {
+			const clickedRestaurant = restaurantList.find(
+				(restaurant) => restaurant.id === currentClickedPlace.id
+			);
+			if (clickedRestaurant === undefined) return;
+
+			setCurrentRestaurant(clickedRestaurant);
+		}
+	}, [currentClickedPlace]);
 
 	return (
 		<>

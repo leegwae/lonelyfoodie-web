@@ -6,7 +6,7 @@ export const searchResultListState = atom<SearchResult[]>({
 	default: [],
 });
 
-export const hasSearchResultState = selector({
+export const hasSearchResultListState = selector({
 	key: 'hasSearchResult',
 	get: ({ get }) => get(searchResultListState).length !== 0,
 });
