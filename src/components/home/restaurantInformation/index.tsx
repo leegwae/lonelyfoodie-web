@@ -8,7 +8,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { Restaurant } from '@src/types/restaurant';
 import Tabs from '@home/tabs';
 import Tab from '@home/tab';
-import TabPanel from '@home/tabpanel';
+import TabPanel from '@home/tabPanel';
 import IconItem from '@home/restaurantInformation/iconItem';
 import ReviewList from '@home/restaurantInformation/reviewList';
 import {
