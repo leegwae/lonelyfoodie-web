@@ -51,6 +51,8 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			KAKAO_KEY: JSON.stringify(process.env.KAKAO_KEY),
+			REST_API_KEY: JSON.stringify(process.env.REST_API_KEY),
+			SERVER: JSON.stringify(process.env.SERVER),
 		}),
 	],
 	output: {

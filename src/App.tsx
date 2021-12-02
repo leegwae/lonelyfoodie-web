@@ -10,13 +10,6 @@ import Loading from '@loading/Loading';
 import IconLink from '@common/iconLink';
 import Sidebar from '@common/sidebar';
 
-// TODO: type definition 다른 폴더로 빼기
-declare global {
-	interface Window {
-		kakao: any;
-	}
-}
-
 const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@login/Login'));
 const Mypage = lazy(() => import('@mypage/Mypage'));
