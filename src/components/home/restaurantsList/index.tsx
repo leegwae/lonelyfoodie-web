@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import RestaurantItem from '@home/restaurantsItem';
-import { Restaurant } from '@src/types/restaurant';
-import { restaurantListDemoState } from '@atoms/restaurant';
+import {
+	restaurantListDemoState,
+	currentRestaurantState,
+} from '@atoms/restaurant';
 
-interface RestaurantListProps {
-	onItemClick: (props: Restaurant) => void;
-}
-const RestaurantList = ({ onItemClick }: RestaurantListProps) => {
+const RestaurantList = () => {
 	const restaurantList = useRecoilValue(restaurantListDemoState);
+	const setCurrentRestaurant = useSetRecoilState(currentRestaurantState);
 
 	return (
 		<StyledList>
@@ -18,7 +18,7 @@ const RestaurantList = ({ onItemClick }: RestaurantListProps) => {
 					<RestaurantItem
 						key={restaurant.id}
 						{...restaurant}
-						onClick={() => onItemClick(restaurant)}
+						onClick={() => setCurrentRestaurant(restaurant)}
 					/>
 				);
 			})}

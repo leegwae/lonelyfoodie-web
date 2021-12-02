@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import RoomIcon from '@mui/icons-material/Room';
 import MapIcon from '@mui/icons-material/Map';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
@@ -9,18 +11,16 @@ import Tab from '@home/tab';
 import TabPanel from '@home/tabPanel';
 import IconItem from '@home/restaurantInformation/iconItem';
 import RestaurantRiviewItem from '@home/restaurantReviewItem';
-import { Link } from 'react-router-dom';
+import { currentRestaurantState } from '@atoms/restaurant';
 
-interface RestaurantInformationProps {
-	restaurant: Restaurant;
-	onGoBackClick: () => void;
-}
-const RestaurantInformation = ({
-	restaurant,
-	onGoBackClick,
-}: RestaurantInformationProps) => {
+const RestaurantInformation = () => {
+	const currentRestaurant = useRecoilValue(
+		currentRestaurantState
+	) as Restaurant;
+	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
 	const { placeName, roadAddressName, phone, star, review, color } =
-		restaurant;
+		currentRestaurant;
+
 	const [tabIndex, setTabIndex] = useState<number>(0);
 
 	const handleTabChange = (
@@ -66,7 +66,7 @@ const RestaurantInformation = ({
 	};
 	return (
 		<Wrapper>
-			<ColorBox color={color} onClick={onGoBackClick} />
+			<ColorBox color={color} onClick={resetCurrentRestaurant} />
 			<Title>{placeName}</Title>
 			<StyledContainer>
 				<span>⭐{star} / 5</span>

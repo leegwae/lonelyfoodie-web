@@ -37,7 +37,7 @@ const RestaurantRiviewItem = ({
 	);
 };
 
-const StyledItem = styled('li')({
+const StyledItem = styled('ul')({
 	listStyle: 'none',
 	display: 'inline',
 	flex: 1,

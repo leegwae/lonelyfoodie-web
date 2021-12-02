@@ -5,21 +5,19 @@ import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
 import { searchResultListState } from '@atoms/searchResult';
 
+export const currentRestaurantState = atom<Restaurant | null>({
+	key: 'currentRestaurant',
+	default: null,
+});
+
+export const hasCurrentRestaurantState = selector<boolean>({
+	key: 'hasCurrentRestaurant',
+	get: ({ get }) => get(currentRestaurantState) !== null,
+});
+
 export const restaurantListState = atom<Restaurant[]>({
 	key: 'restaurantList',
 	default: [],
-});
-
-export const currentRestaurantState = selector({
-	key: 'currentRestaurant',
-	get: async () => {
-		const response = await fetch(
-			'/api/restaurants/977f2b8b-ad2e-4202-9436-bbab949c352f'
-		);
-		const data = response.json();
-
-		return data;
-	},
 });
 
 export const restaurantListDemoState = selector<Restaurant[]>({
@@ -35,4 +33,9 @@ export const restaurantListDemoState = selector<Restaurant[]>({
 
 		return restaurantListDemo;
 	},
+});
+
+export const hasRestaurantListState = selector<boolean>({
+	key: 'hasRestaurantList',
+	get: ({ get }) => get(restaurantListDemoState).length !== 0,
 });

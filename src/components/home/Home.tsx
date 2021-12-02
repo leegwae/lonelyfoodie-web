@@ -7,39 +7,51 @@ import KeywordInput from '@home/keywordInput';
 import RestaurantList from '@home/restaurantsList';
 import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import {
 	searchResultListState,
 	hasSearchResultState,
 } from '@atoms/searchResult';
+import {
+	currentRestaurantState,
+	hasCurrentRestaurantState,
+} from '@atoms/restaurant';
 
 const Home = () => {
+	// =========== 키워드 검색 ===============================
 	const inputRef = useRef<string>('');
+	const [keyword, setKeyword] = useState<string>('');
+
+	// ========== 패널 스크롤을 위한 ref ======================
 	const panelRef = useRef<HTMLDivElement>(null);
 
-	const [keyword, setKeyword] = useState<string>('');
-	const hasSearchResult = useRecoilValue(hasSearchResultState);
+	// ========= 카카오 지도 API 검색 결과 관련 =================
 	const searchResultList = useRecoilValue(searchResultListState);
-	const [information, setInformation] = useState<Restaurant | null>(null);
+	const hasSearchResult = useRecoilValue(hasSearchResultState);
 
+	// ========= 카카오 지도 API 검색 결과로 불러온 음식점 정보 관련 ===========
+	const hasCurrentRestaurant = useRecoilValue(hasCurrentRestaurantState);
+	const resetCurrentRestaurant = useResetRecoilState(currentRestaurantState);
+
+	// 키워드 검색 시
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setInformation(null);
+		// 현재 패널에 띄워진 음식점 정보를 초기화
+		resetCurrentRestaurant();
+		// 키워드를 사용자의 입력값으로 설정
 		setKeyword(inputRef.current);
 	};
 
+	// 새로운 키워드로 검색하여 검색 결과가 변하면
 	useEffect(() => {
+		// 스크롤을 상단으로 올린다.
 		panelRef?.current?.scrollTo(0, 0);
 	}, [searchResultList]);
-
-	const handleInformation = (props: Restaurant) => {
-		setInformation(props);
-	};
 
 	return (
 		<>
 			<MapWrapper>
-				<Map keyword={keyword} setInformation={setInformation} />
+				<Map keyword={keyword} />
 				<FormWrapper>
 					<Form onSubmit={handleSubmit}>
 						<KeywordInput
@@ -51,17 +63,12 @@ const Home = () => {
 					<PanelWrapper>
 						{hasSearchResult && (
 							<Panel ref={panelRef}>
-								<RestaurantList
-									onItemClick={handleInformation}
-								/>
+								<RestaurantList />
 							</Panel>
 						)}
-						{information && (
+						{hasCurrentRestaurant && (
 							<Panel>
-								<RestaurantInformation
-									restaurant={information}
-									onGoBackClick={() => setInformation(null)}
-								/>
+								<RestaurantInformation />
 							</Panel>
 						)}
 					</PanelWrapper>
