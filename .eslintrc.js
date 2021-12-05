@@ -25,6 +25,7 @@ module.exports = {
 		'no-use-before-define': 'off',
 		'no-new': 'off',
 		'no-plusplus': 'off',
+		'no-alert': 'off',
 		'consistent-return': 'off',
 		'no-useless-return': 'off',
 		'import/no-unresolved': 'off',

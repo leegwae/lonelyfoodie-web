@@ -24,7 +24,7 @@ const App = (): JSX.Element => (
 			<Sidebar>
 				<IconLink to="/" icon={<HomeIcon fontSize="large" />} />
 				<IconLink
-					to="/login"
+					to="/mypage"
 					icon={<AccountCircleIcon fontSize="large" />}
 				/>
 			</Sidebar>

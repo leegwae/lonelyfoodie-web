@@ -48,6 +48,18 @@ const Map = forwardRef<HTMLDivElement, MapProps>(({ keyword }, ref) => {
 				const searched: SearchResult[] = formatRawResults(raw);
 				setSearchResultList(searched);
 
+				const t = searched.map((result) => {
+					const { placeName, id, x, y } = result;
+					const obj = {
+						name: placeName,
+						kakao_id: id,
+						latitude: y,
+						longitude: x,
+					};
+					return JSON.stringify(obj);
+				}).join(`,
+`);
+				console.log(t);
 				// 검색 결과 기준으로 지도 재설정
 				const bounds = getMapBounds(
 					searched.map((place) => ({ x: place.x, y: place.y }))

@@ -7,3 +7,9 @@ export interface Review {
 	content?: string;
 	colors: string[];
 }
+
+export interface ReviewCreate {
+	restaurant_id: string;
+	content: string;
+	star: number;
+}
