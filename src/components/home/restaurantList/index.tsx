@@ -3,22 +3,25 @@ import styled from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import RestaurantItem from '@home/restaurantItem';
 import {
-	restaurantListDemoState,
-	currentRestaurantIdState,
+	currentRestaurantListState,
+	currentRestaurantKakaoIdState,
 } from '@atoms/restaurant';
 
 const RestaurantList = () => {
-	const restaurantList = useRecoilValue(restaurantListDemoState);
-	const setCurrentRestaurantId = useSetRecoilState(currentRestaurantIdState);
+	const restaurantList = useRecoilValue(currentRestaurantListState);
+	const setCurrentRestaurantKakaoId = useSetRecoilState(
+		currentRestaurantKakaoIdState
+	);
 
 	return (
 		<StyledList>
 			{restaurantList.map((restaurant) => {
+				const { kakaomapId } = restaurant;
 				return (
 					<RestaurantItem
-						key={restaurant.id}
+						key={kakaomapId}
 						{...restaurant}
-						onClick={() => setCurrentRestaurantId(restaurant.id)}
+						onClick={() => setCurrentRestaurantKakaoId(kakaomapId)}
 					/>
 				);
 			})}

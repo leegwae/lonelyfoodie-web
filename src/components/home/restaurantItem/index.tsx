@@ -7,15 +7,19 @@ interface RestaurantItemProps extends Restaurant {
 }
 
 const RestaurantItem = (props: RestaurantItemProps) => {
-	const { color, placeName, review, roadAddressName, star, onClick } = props;
+	const { color, name, reviewCount, roadAddressName, averageStar, onClick } =
+		props;
+	// const { color, placeName, review, roadAddressName, star, onClick } = props;
 	return (
 		<StyledItem onClick={onClick}>
 			<ColorBox color={color} />
 			<Wrapper>
-				<Title>{placeName}</Title>
+				<Title>{name}</Title>
 				<StyledContainer>
-					<span style={{ marginRight: '20px' }}>⭐{star} / 5</span>
-					<span>리뷰 {review}개</span>
+					<span style={{ marginRight: '20px' }}>
+						⭐{averageStar} / 5
+					</span>
+					<span>리뷰 {reviewCount}개</span>
 				</StyledContainer>
 				<StyledContainer>{roadAddressName}</StyledContainer>
 			</Wrapper>

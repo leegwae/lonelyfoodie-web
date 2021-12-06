@@ -8,10 +8,10 @@ import RestaurantInformation from '@home/restaurantInformation';
 import Logo from '@home/logo';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import {
-	restaurantListDemoState,
+	currentRestaurantListState,
 	hasRestaurantListState,
 	hasCurrentRestaurantState,
-	currentRestaurantIdState,
+	currentRestaurantKakaoIdState,
 } from '@atoms/restaurant';
 import currentPlaceState from '@library/map/atoms/currentPlace';
 
@@ -27,21 +27,23 @@ const Home = () => {
 	const currentClickedPlace = useRecoilValue(currentPlaceState);
 
 	// ========= 음식점 리스트 =================
-	const restaurantList = useRecoilValue(restaurantListDemoState);
+	const restaurantList = useRecoilValue(currentRestaurantListState);
 	const hasRestaurantList = useRecoilValue(hasRestaurantListState);
 
 	// ========= 하나의 음식점 정보 ===========
 	const hasCurrentRestaurant = useRecoilValue(hasCurrentRestaurantState);
-	const resetCurrentRestaurantId = useResetRecoilState(
-		currentRestaurantIdState
+	const resetCurrentRestaurantKakaoId = useResetRecoilState(
+		currentRestaurantKakaoIdState
 	);
-	const setCurrentRestaurantId = useSetRecoilState(currentRestaurantIdState);
+	const setCurrentRestaurantId = useSetRecoilState(
+		currentRestaurantKakaoIdState
+	);
 
 	// 키워드 검색 시
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		// 현재 패널에 띄워진 음식점 정보를 초기화
-		resetCurrentRestaurantId();
+		resetCurrentRestaurantKakaoId();
 		// 키워드를 사용자의 입력값으로 설정
 		setKeyword(inputRef.current);
 	};

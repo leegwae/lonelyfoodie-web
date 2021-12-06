@@ -1,12 +1,12 @@
 import { selector } from 'recoil';
 import { Review } from '@src/types/review';
 import getRandomStar from '@utils/getRandomStar';
-import { currentRestaurantIdState } from '@atoms/restaurant';
+import { currentRestaurantKakaoIdState } from '@atoms/restaurant';
 
 export const currentReviewListDemoState = selector<Review[]>({
 	key: 'currentReviewListDemo',
 	get: ({ get }) => {
-		const currentRestaurantId = get(currentRestaurantIdState);
+		const currentRestaurantId = get(currentRestaurantKakaoIdState);
 		const currentReivewListDemo = [1, 2, 3].map((_, i) => ({
 			id: i.toString(),
 			writerId: i.toString(),

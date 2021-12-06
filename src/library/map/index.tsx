@@ -13,6 +13,12 @@ import createWindowContent from '@library/map/utils/createWindowContent';
 import { searchResultListState } from '@library/map/atoms/searchResults';
 import currentPlaceState from '@library/map/atoms/currentPlace';
 
+declare global {
+	interface Window {
+		kakao: any;
+	}
+}
+
 const { kakao } = window;
 
 interface MapProps {

@@ -12,7 +12,7 @@ import TabPanel from '@home/tabPanel';
 import IconItem from '@home/restaurantInformation/iconItem';
 import ReviewList from '@home/restaurantInformation/reviewList';
 import {
-	currentRestaurantIdState,
+	currentRestaurantKakaoIdState,
 	currentRestaurantState,
 } from '@atoms/restaurant';
 
@@ -21,12 +21,11 @@ const RestaurantInformation = () => {
 		currentRestaurantState
 	) as Restaurant;
 	const resetCurrentRestaurantId = useResetRecoilState(
-		currentRestaurantIdState
+		currentRestaurantKakaoIdState
 	);
 
-	const { placeName, roadAddressName, phone, star, review, color } =
+	const { name, roadAddressName, phone, averageStar, reviewCount, color } =
 		currentRestaurant;
-
 	// ================ 탭 패널 인덱스 =========================
 	const [tabIndex, setTabIndex] = useState<number>(0);
 
@@ -36,8 +35,6 @@ const RestaurantInformation = () => {
 	) => {
 		setTabIndex(newTabIndex);
 	};
-
-	const writeURL = '';
 
 	const getInformationTab = () => {
 		return (
@@ -63,10 +60,10 @@ const RestaurantInformation = () => {
 	return (
 		<Wrapper>
 			<ColorBox color={color} onClick={resetCurrentRestaurantId} />
-			<Title>{placeName}</Title>
+			<Title>{name}</Title>
 			<StyledContainer>
-				<span>⭐{star} / 5</span>
-				<span>리뷰 {review}개</span>
+				<span>⭐{averageStar} / 5</span>
+				<span>리뷰 {reviewCount}개</span>
 			</StyledContainer>
 			<TapPanelWrapper>
 				<Tabs value={tabIndex} onChange={handleTabChange}>
