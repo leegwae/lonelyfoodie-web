@@ -10,6 +10,18 @@ export interface Review {
 
 export interface ReviewCreate {
 	restaurant_id: string;
+	title: string;
 	content: string;
 	star: number;
 }
+
+// id	string
+// restaurant_id	string
+// writer_id	string
+// title	string
+// content	string
+// star	integer
+// created_at	string($date-time)
+// updated_at	string($date-time)
+// deleted_at	string($date-time)
+// }

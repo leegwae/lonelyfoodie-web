@@ -1,10 +1,10 @@
-import { selector } from 'recoil';
-import { Review } from '@src/types/review';
+import { atom, selector } from 'recoil';
+import { Review, ReviewCreate } from '@src/types/review';
 import getRandomStar from '@utils/getRandomStar';
 import { currentRestaurantKakaoIdState } from '@atoms/restaurant';
 
 export const currentReviewListDemoState = selector<Review[]>({
-	key: 'currentReviewListDemo',
+	key: 'CurrentReviewListDemo',
 	get: ({ get }) => {
 		const currentRestaurantId = get(currentRestaurantKakaoIdState);
 		const currentReivewListDemo = [1, 2, 3].map((_, i) => ({
@@ -23,6 +23,6 @@ export const currentReviewListDemoState = selector<Review[]>({
 });
 
 export const currentReviewListState = selector<Review[]>({
-	key: 'currentReviewList',
+	key: 'CurrentReviewList',
 	get: ({ get }) => get(currentReviewListDemoState),
 });

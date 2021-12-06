@@ -15,11 +15,11 @@ const RestaurantList = () => {
 
 	return (
 		<StyledList>
-			{restaurantList.map((restaurant) => {
+			{restaurantList.map((restaurant, i) => {
 				const { kakaomapId } = restaurant;
 				return (
 					<RestaurantItem
-						key={kakaomapId}
+						key={kakaomapId.concat(`${i}`)}
 						{...restaurant}
 						onClick={() => setCurrentRestaurantKakaoId(kakaomapId)}
 					/>

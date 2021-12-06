@@ -39,18 +39,20 @@ const Edit = ({ history }: RouteComponentProps) => {
 		const authorization = getToken();
 
 		if (authorization === null) return;
+		if (currentRestaurant === undefined) return;
 
 		const review: ReviewCreate = {
-			restaurant_id: currentRestaurant.id,
+			restaurant_id: currentRestaurant?.id,
+			title: '타이틀',
 			content: text,
 			star,
 		};
-		const response = await fetch('/api/review', {
+		const response = await fetch('/api/review/', {
 			method: 'POST',
 			headers: {
 				Authorization: authorization,
 			},
-			body: JSON.stringify({ ...review, title: '타이틀' }),
+			body: JSON.stringify({ ...review }),
 		});
 
 		if (response.status === 200) alert('성공적으로 리뷰를 작성했습니다');
@@ -65,7 +67,7 @@ const Edit = ({ history }: RouteComponentProps) => {
 			justifyContent="center"
 			alignItems="center"
 		>
-			<div>{currentRestaurant.placeName}</div>
+			<div>{currentRestaurant?.name}</div>
 			<Box
 				sx={{
 					p: 2,
@@ -112,15 +114,10 @@ const Edit = ({ history }: RouteComponentProps) => {
 				/>
 			</Box>
 			<Stack spacing={2} direction="row">
-				<Button
-					variant="contained"
-					onClick={() => {
-						alert('Save button Clicked');
-					}}
-				>
+				<Button variant="contained" onClick={onSubmitClick}>
 					저장
 				</Button>
-				<Button variant="outlined" onClick={onSubmitClick}>
+				<Button variant="outlined" onClick={() => history.goBack()}>
 					취소
 				</Button>
 			</Stack>
