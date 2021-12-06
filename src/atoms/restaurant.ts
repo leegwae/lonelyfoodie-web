@@ -38,9 +38,13 @@ const restaurantListKaKaoQuery = selectorFamily<Restaurant[], SearchResult[]>({
 		(searchResultList) =>
 		async ({ get }) => {
 			const restaurantList = searchResultList.map((kakaoData) => {
-				const kakaomapId = 'a79894e6-0484-4571-8a3d-9bfc1afa0463';
+				const kakaomapId = '8cd4c780-3bd5-435d-8dcd-d578bfac092a';
 				// const kakaoId = kakao.id;
-				const restaurantInfo = get(restaurantKakaoQuery(kakaomapId));
+				const restaurantInfo = get(
+					restaurantKakaoQuery(kakaomapId)
+				) || {
+					id: 'TEST_ID',
+				};
 				return {
 					id: restaurantInfo.id,
 					kakaomapId,
