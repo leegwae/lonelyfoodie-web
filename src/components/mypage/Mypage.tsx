@@ -19,6 +19,7 @@ const Mypage = ({ history }: RouteComponentProps) => {
 		history.push('/');
 	};
 
+	console.log(user);
 	return (
 		<div>
 			{user.nickname}님, 로그아웃하시겠어요?

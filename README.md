@@ -16,7 +16,7 @@
 ```
 KAKAO_KEY=복사한_JavaScript_키
 REST_API_KEY=복사한_REST_API_키
-SERVER=http://localhost:5000
+REDIRECT_URI=http://localhost:8080/oauth
 ```
 
 - <u><b>`복사한_JavaScript_키`와 `복사한_REST_API_키`가 유출되지 않도록 주의하세요.</b></u>
