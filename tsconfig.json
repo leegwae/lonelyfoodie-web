@@ -49,6 +49,15 @@
     "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
+      "@atoms/*": ["src/atoms/*"],
+      "@common/*": ["src/components/common/*"],
+      "@home/*": ["src/components/home/*"],
+      "@login/*": ["src/components/login/*"],
+      "@auth/*": ["src/components/auth/*"],
+      "@mypage/*": ["src/components/mypage/*"],
+      "@withdraw/*": ["src/components/withdraw/*"],
+      "@loading/*": ["src/components/loading/*"],
+      "@edit/*": ["src/components/edit/*"],
       "@components/*": ["src/components/*"],
       "@library/*": ["src/library/*"],
       "@routes/*": ["src/routes/*"],
