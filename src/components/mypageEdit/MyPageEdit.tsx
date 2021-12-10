@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,12 +12,11 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import userState from '@atoms/user';
+import { useRecoilValue } from 'recoil';
 
-const MyInfoEdit = () => {
-	const UserID = 'TestID';
-	const UserEmail = 'test@gmail.com';
-	const UserNick = 'TestNick';
-	const UserStuNum = 'TestStuNum';
+const MyInfoEdit = ({ history }: RouteComponentProps) => {
+	const user = useRecoilValue(userState);
 
 	const [dep, setDep] = React.useState('');
 
@@ -36,19 +36,17 @@ const MyInfoEdit = () => {
 			}}
 		>
 			<h1>마이페이지-내 정보 수정하기</h1>
-			<ul>아이디: {UserID}</ul>
-			<ul>이메일: {UserEmail}</ul>
+			<ul>이메일: {user?.email}</ul>
 			<ul>
 				<br />
-				닉네임: {'    '}
-				<TextField id="userNick" label={UserNick} variant="standard" />
-				<br />
-				학번: {'    '}
 				<TextField
-					id="userStuNum"
-					label={UserStuNum}
+					id="userNick"
+					label="닉네임"
 					variant="standard"
+					defaultValue={user?.nickname}
 				/>
+				<br />
+				<TextField id="userStuNum" label="학번" variant="standard" />
 				<br />
 				학과: {'    '}
 				<Box sx={{ minWidth: 120 }}>
@@ -98,7 +96,12 @@ const MyInfoEdit = () => {
 			</ul>
 			<Stack direction="row-reverse" spacing={2}>
 				<Button variant="contained">저장</Button>
-				<Button variant="outlined">취소</Button>
+				<Button
+					variant="outlined"
+					onClick={() => history.push('/mypage')}
+				>
+					취소
+				</Button>
 			</Stack>
 		</Container>
 	);

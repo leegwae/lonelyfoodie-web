@@ -40,7 +40,6 @@ const RestaurantInformation = () => {
 		return (
 			<TabPanel value={tabIndex} index={0}>
 				<IconItem icon={<RoomIcon />}>{roadAddressName}</IconItem>
-				<IconItem icon={<MapIcon />}>길찾기 바로가기</IconItem>
 				<IconItem icon={<LocalPhoneIcon />}>{phone}</IconItem>
 				<Footer>
 					이 정보는 카카오 지도 API를 기반으로 제공됩니다.

@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import { userState } from '@atoms/user';
+import userState from '@atoms/user';
 import getToken from '@library/storage/getToken';
 import { ReviewCreate } from '@src/types/review';
 import { currentRestaurantState } from '@atoms/restaurant';
@@ -26,16 +26,18 @@ const Edit = ({ history }: RouteComponentProps) => {
 		setText(e.target.value);
 	};
 
-	const onSubmitClick = () => {
+	const onSubmitClick = (e: React.SyntheticEvent) => {
 		if (star === null || !text) {
 			alert('내용을 입력해주세요');
 			return;
 		}
 
-		submitReview();
+		submitReview(e);
 	};
 
-	const submitReview = async () => {
+	const submitReview = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+
 		const authorization = getToken();
 
 		if (authorization === null) return;
@@ -52,10 +54,11 @@ const Edit = ({ history }: RouteComponentProps) => {
 			headers: {
 				Authorization: authorization,
 			},
-			body: JSON.stringify({ ...review }),
+			body: JSON.stringify(review),
 		});
 
 		if (response.status === 200) alert('성공적으로 리뷰를 작성했습니다');
+		else alert('문제가 발생했습니다');
 
 		history.goBack();
 	};
