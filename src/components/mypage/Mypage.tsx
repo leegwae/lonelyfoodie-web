@@ -1,7 +1,7 @@
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { userState } from '@atoms/user';
+import userState from '@atoms/user';
 import clearToken from '@library/storage/clearToken';
 
 const Mypage = ({ history }: RouteComponentProps) => {

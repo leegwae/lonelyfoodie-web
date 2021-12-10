@@ -7,17 +7,15 @@ import generateGradient from '@utils/getRandomGradient';
 import { searchResultListState } from '@library/map/atoms/searchResults';
 
 /*
-TODO: 현재는 kakao id가 아니라 db에 저장된 id로 음식점 정보 가져오는 API만 있음
-그래서 kakao id로 음식점 정보 가져오는 API로 바꿔야함
-*/
-/*
 TODO: 현재 음식점 정보 가져오는 API는 리뷰 개수, 평균 별점 안 가져옴
 */
 // kakao map id로 음식점 정보 가져오기
 const restaurantKakaoQuery = selectorFamily({
 	key: 'RestaurantQuery',
 	get: (kakaomapId: string) => async () => {
-		const response = await fetch(`/api/restaurants/${kakaomapId}`);
+		const response = await fetch(
+			`/api/restaurants/?page=1&per_page=20&kakaomap_id=${kakaomapId}`
+		);
 
 		if (response.status === 404) return undefined;
 
@@ -38,13 +36,8 @@ const restaurantListKaKaoQuery = selectorFamily<Restaurant[], SearchResult[]>({
 		(searchResultList) =>
 		async ({ get }) => {
 			const restaurantList = searchResultList.map((kakaoData) => {
-				const kakaomapId = '8cd4c780-3bd5-435d-8dcd-d578bfac092a';
-				// const kakaoId = kakao.id;
-				const restaurantInfo = get(
-					restaurantKakaoQuery(kakaomapId)
-				) || {
-					id: 'TEST_ID',
-				};
+				const kakaomapId = kakaoData.id;
+				const restaurantInfo = get(restaurantKakaoQuery(kakaomapId));
 				return {
 					id: restaurantInfo.id,
 					kakaomapId,
@@ -94,6 +87,11 @@ export const currentRestaurantState = selector<Restaurant | undefined>({
 			(restaurant) => restaurant.kakaomapId === currentRestaurantKakaoId
 		);
 	},
+});
+
+export const currentRestaurantIdState = selector<string>({
+	key: 'CurrentRestaurantId',
+	get: ({ get }) => get(currentRestaurantState)?.id || '',
 });
 
 // 현재 음식점 정보가 있는가

@@ -1,7 +1,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '@atoms/user';
+import userState from '@atoms/user';
 import { User } from '@src/types/user';
 import setToken from '@library/storage/setToken';
 import getToken from '@library/storage/getToken';
@@ -15,7 +15,7 @@ const Auth = ({ history }: RouteComponentProps) => {
 		const response = await fetch(`/api/oauth/callback/?code=${code}`);
 		const { access_token } = await response.json();
 		setToken(access_token);
-
+		console.log(access_token);
 		const rawData = await fetchUser();
 		const camelCasedData = getCamelCasedObject(rawData) as User;
 		setUser(camelCasedData);
