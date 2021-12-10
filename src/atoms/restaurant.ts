@@ -1,21 +1,14 @@
 import { atom, selector, selectorFamily } from 'recoil';
 import { SearchResult } from '@library/map/types';
 import { Restaurant } from '@src/types/restaurant';
-import getRandomStar from '@utils/getRandomStar';
-import getRandomInt from '@utils/getRandomInt';
 import generateGradient from '@utils/getRandomGradient';
 import { searchResultListState } from '@library/map/atoms/searchResults';
 
-/*
-TODO: 현재 음식점 정보 가져오는 API는 리뷰 개수, 평균 별점 안 가져옴
-*/
 // kakao map id로 음식점 정보 가져오기
 const restaurantKakaoQuery = selectorFamily({
 	key: 'RestaurantQuery',
 	get: (kakaomapId: string) => async () => {
-		const response = await fetch(
-			`/api/restaurants/?page=1&per_page=20&kakaomap_id=${kakaomapId}`
-		);
+		const response = await fetch(`/api/restaurants/kakao/${kakaomapId}`);
 
 		if (response.status === 404) return undefined;
 
@@ -25,10 +18,6 @@ const restaurantKakaoQuery = selectorFamily({
 	},
 });
 
-/*
-TODO: 현재 kakao id로 음식점 정보 가져오는 API가 없으므로
-임시 생성한 아이디를 파라미터로 전달
-*/
 // 카카오 지도 API로 탐색한 장소들에 대하여, 각각 음식점 정보 가져오기
 const restaurantListKaKaoQuery = selectorFamily<Restaurant[], SearchResult[]>({
 	key: 'RestaurantListQuery',
@@ -37,9 +26,10 @@ const restaurantListKaKaoQuery = selectorFamily<Restaurant[], SearchResult[]>({
 		async ({ get }) => {
 			const restaurantList = searchResultList.map((kakaoData) => {
 				const kakaomapId = kakaoData.id;
-				const restaurantInfo = get(restaurantKakaoQuery(kakaomapId));
+				const { restaurant, review_count, avg_star_rate } = get(
+					restaurantKakaoQuery(kakaomapId)
+				);
 				return {
-					id: restaurantInfo.id,
 					kakaomapId,
 					name: kakaoData.placeName,
 					roadAddressName: kakaoData.roadAddressName,
@@ -47,10 +37,11 @@ const restaurantListKaKaoQuery = selectorFamily<Restaurant[], SearchResult[]>({
 					longitude: kakaoData.x,
 					latitude: kakaoData.y,
 					color: generateGradient(),
-					averageStar: getRandomStar(),
-					// averageStar: restaurantInfo.averageStar,
-					// reviewCount: restaurantInfo.reviewCount,
-					reviewCount: getRandomInt(0, 100),
+					// averageStar: getRandomStar(),
+					// reviewCount: getRandomInt(0, 100),
+					id: restaurant.id,
+					averageStar: avg_star_rate || 0,
+					reviewCount: review_count || 0,
 				};
 			});
 

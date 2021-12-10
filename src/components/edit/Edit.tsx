@@ -26,18 +26,20 @@ const Edit = ({ history }: RouteComponentProps) => {
 		setText(e.target.value);
 	};
 
-	const onSubmitClick = () => {
+	const onSubmitClick = (e: React.SyntheticEvent) => {
 		if (star === null || !text) {
 			alert('내용을 입력해주세요');
 			return;
 		}
 
-		submitReview();
+		submitReview(e);
 	};
 
-	const submitReview = async () => {
+	const submitReview = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+
 		const authorization = getToken();
-		console.log(authorization);
+
 		if (authorization === null) return;
 		if (currentRestaurant === undefined) return;
 
@@ -56,6 +58,7 @@ const Edit = ({ history }: RouteComponentProps) => {
 		});
 
 		if (response.status === 200) alert('성공적으로 리뷰를 작성했습니다');
+		else alert('문제가 발생했습니다');
 
 		history.goBack();
 	};

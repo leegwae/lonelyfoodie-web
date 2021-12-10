@@ -1,22 +1,52 @@
-import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Template from '@common/template';
 import LabelItem from '@withdraw/labelItem';
+import userState from '@atoms/user';
+import getToken from '@library/storage/getToken';
+import clearToken from '@library/storage/clearToken';
 
-const Withdraw = () => {
+const Withdraw = ({ history }: RouteComponentProps) => {
+	const user = useRecoilValue(userState);
+	const resetUser = useResetRecoilState(userState);
+
+	const withdraw = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+
+		const auth = getToken();
+
+		if (auth === null) return;
+
+		const response = await fetch(`/api/users/${user?.id}`, {
+			method: 'DELETE',
+			headers: {
+				Authorization: JSON.stringify(auth),
+			},
+		});
+
+		if (response.status === 204) {
+			alert('성공적으로 탈퇴했습니다.');
+			clearToken();
+			resetUser();
+		} else alert(`${response.status}: ${response.statusText}`);
+
+		history.push('/');
+	};
+
 	return (
 		<Template
 			title="고독한 시식가 탈퇴"
-			sub="귤농사 님, 떠나신다니 아쉬워요"
+			sub={`${user?.nickname || '이름 없음'}님, 떠나신다니 아쉬워요`}
 		>
 			<StyledWrapper>
 				<div>
-					<LabelItem label="아이디">abc1234</LabelItem>
-					<LabelItem label="비밀번호">
-						<StyledInput type="password" />
-					</LabelItem>
+					<LabelItem label="이메일">{user?.email}</LabelItem>
 				</div>
-				<StyledButton>고독한 시식가 탈퇴하기</StyledButton>
+				<StyledButton onClick={withdraw}>
+					고독한 시식가 탈퇴하기
+				</StyledButton>
 			</StyledWrapper>
 		</Template>
 	);
@@ -30,10 +60,6 @@ const StyledWrapper = styled('div')({
 	padding: '0px 20px',
 });
 
-const StyledInput = styled('input')({
-	margin: 0,
-});
-
 const StyledButton = styled('button')({
 	height: '50px',
 	width: '400px',
@@ -41,7 +67,11 @@ const StyledButton = styled('button')({
 	fontSize: '25px',
 	fontWeight: 'bold',
 	color: 'white',
-	backgroundColor: '#F55919',
+	backgroundColor: '#ffba9e',
+
+	'&: hover': {
+		backgroundColor: '#F55919',
+	},
 });
 
 export default Withdraw;

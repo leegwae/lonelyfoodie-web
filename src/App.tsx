@@ -14,6 +14,7 @@ import Auth from '@auth/Auth';
 const Home = lazy(() => import('@home/Home'));
 const Login = lazy(() => import('@login/Login'));
 const Mypage = lazy(() => import('@mypage/Mypage'));
+const MyPageEdit = lazy(() => import('@components/mypageEdit/MyPageEdit'));
 const Withdraw = lazy(() => import('@withdraw/Withdraw'));
 const Edit = lazy(() => import('@edit/Edit'));
 
@@ -35,6 +36,7 @@ const App = (): JSX.Element => (
 						<Route path="/login" component={Login} />
 						<Route path="/edit" component={Edit} />
 						<Route path="/mypage" exact component={Mypage} />
+						<Route path="/mypage/edit" component={MyPageEdit} />
 						<Route path="/mypage/withdraw" component={Withdraw} />
 
 						<Route path="/oauth" component={Auth} />

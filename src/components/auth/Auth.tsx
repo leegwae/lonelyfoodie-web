@@ -15,7 +15,6 @@ const Auth = ({ history }: RouteComponentProps) => {
 		const response = await fetch(`/api/oauth/callback/?code=${code}`);
 		const { access_token } = await response.json();
 		setToken(access_token);
-		console.log(access_token);
 		const rawData = await fetchUser();
 		const camelCasedData = getCamelCasedObject(rawData) as User;
 		setUser(camelCasedData);
@@ -34,7 +33,8 @@ const Auth = ({ history }: RouteComponentProps) => {
 			},
 		});
 
-		if (response.status !== 200) return null;
+		if (response.status === 200) alert('환영합니다!');
+		else alert(`${response.status}: ${response.statusText}`);
 
 		const data = await response.json();
 		return data;
